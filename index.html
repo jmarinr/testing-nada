@@ -3,1514 +3,1335 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PTI Inspect — Mockup Colaborativo</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<title>PTI Inspect — Propuesta Visual v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --navy:#0F2A4A;
-  --navy-light:#1a3d6b;
-  --navy-dark:#091d33;
+  --navy-l:#1a3d6b;
+  --navy-d:#07192e;
   --teal:#00C8A0;
-  --teal-light:#e0faf4;
-  --teal-dark:#00a382;
+  --teal-l:#e0faf4;
+  --teal-d:#009e7e;
+  --green:#16a34a;
+  --green-l:#dcfce7;
+  --green-d:#15803d;
+  --amber:#d97706;
+  --amber-l:#fef3c7;
+  --amber-d:#b45309;
+  --red:#dc2626;
+  --red-l:#fee2e2;
+  --gray:#6b7280;
+  --gray-l:#f3f4f6;
+  --gray-d:#374151;
   --white:#ffffff;
-  --gray-50:#f8f9fa;
-  --gray-100:#f1f3f5;
-  --gray-200:#e9ecef;
-  --gray-300:#dee2e6;
-  --gray-400:#ced4da;
-  --gray-500:#adb5bd;
-  --gray-600:#868e96;
-  --gray-700:#495057;
-  --gray-800:#343a40;
-  --gray-900:#212529;
-  --red:#e03131;
-  --red-light:#fff5f5;
-  --amber:#f59f00;
-  --amber-light:#fff9db;
-  --green:#2f9e44;
-  --green-light:#ebfbee;
-  --blue:#1971c2;
-  --blue-light:#e7f5ff;
-  --purple:#6741d9;
-  --purple-light:#f3f0ff;
-  --screen-w:390px;
-  --screen-h:780px;
-  --header-h:64px;
-  --bottom-h:72px;
+  --text:#111827;
+  --text-2:#6b7280;
+  --border:#e5e7eb;
 }
 
 body{
-  font-family:'Inter',sans-serif;
-  background:#0d1117;
+  font-family:'DM Sans',sans-serif;
+  background:#0a0f1a;
   min-height:100vh;
   display:flex;
   flex-direction:column;
   align-items:center;
-  padding:24px 16px 40px;
-  color:var(--gray-900);
+  padding:24px 16px 48px;
 }
 
-/* ── NAV LEGEND ── */
-.legend{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  justify-content:center;
-  max-width:900px;
-  margin-bottom:28px;
+/* ── NAV ── */
+.nav{
+  display:flex;gap:6px;flex-wrap:wrap;
+  justify-content:center;max-width:920px;
+  margin-bottom:24px;
 }
-.legend-title{
-  width:100%;
-  text-align:center;
-  color:#8b949e;
-  font-size:11px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  margin-bottom:8px;
-  font-weight:500;
+.nav-title{
+  width:100%;text-align:center;
+  color:#4b5563;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;font-family:'DM Sans',sans-serif;
+  margin-bottom:10px;font-weight:600;
 }
-.leg-btn{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  background:#161b22;
-  border:1px solid #30363d;
-  border-radius:20px;
-  padding:6px 14px;
-  color:#c9d1d9;
-  font-size:12px;
-  font-family:'Inter',sans-serif;
-  cursor:pointer;
-  transition:all .15s;
-  white-space:nowrap;
+.nb{
+  font-family:'DM Sans',sans-serif;
+  display:flex;align-items:center;gap:6px;
+  background:#111827;border:1px solid #1f2937;
+  border-radius:8px;padding:7px 14px;
+  color:#9ca3af;font-size:11px;font-weight:500;
+  cursor:pointer;transition:all .15s;
 }
-.leg-btn:hover{background:#1f2937;border-color:#58a6ff}
-.leg-btn.active{background:#1f6feb22;border-color:#58a6ff;color:#58a6ff}
-.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.leg-new{background:#00C8A0}
-.leg-changed{background:#f59f00}
-.leg-same{background:#484f58}
+.nb:hover{background:#1f2937;border-color:#374151;color:#d1d5db}
+.nb.active{background:#0f2a4a;border-color:#00C8A0;color:#00C8A0}
+.nb .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 
 /* ── PHONE FRAME ── */
-.phone-wrap{
-  position:relative;
-  width:var(--screen-w);
-  height:var(--screen-h);
-  background:#1c1c1e;
-  border-radius:48px;
-  padding:12px;
+.phone{
+  width:390px;height:780px;
+  background:#111;
+  border-radius:46px;padding:10px;
   box-shadow:
-    0 0 0 1px #38383a,
-    0 0 0 3px #1c1c1e,
-    0 0 0 4px #38383a,
-    0 32px 80px rgba(0,0,0,.7),
-    inset 0 0 0 1px rgba(255,255,255,.06);
-}
-.phone-notch{
-  position:absolute;
-  top:12px;
-  left:50%;
-  transform:translateX(-50%);
-  width:120px;
-  height:34px;
-  background:#1c1c1e;
-  border-radius:0 0 20px 20px;
-  z-index:100;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-}
-.notch-cam{width:12px;height:12px;border-radius:50%;background:#0a0a0a;border:1px solid #2c2c2e}
-.notch-speaker{width:48px;height:5px;border-radius:3px;background:#0a0a0a}
-.phone-screen{
-  width:100%;
-  height:100%;
-  border-radius:38px;
-  overflow:hidden;
-  background:var(--white);
+    0 0 0 1px #222,
+    0 0 0 3px #0a0a0a,
+    0 0 0 4px #1a1a1a,
+    0 40px 100px rgba(0,0,0,.8),
+    inset 0 1px 0 rgba(255,255,255,.07);
   position:relative;
+}
+.notch{
+  position:absolute;top:10px;left:50%;
+  transform:translateX(-50%);
+  width:114px;height:32px;
+  background:#111;border-radius:0 0 18px 18px;
+  z-index:99;display:flex;align-items:center;
+  justify-content:center;gap:7px;
+}
+.n-cam{width:11px;height:11px;border-radius:50%;background:#0a0a0a;border:1px solid #1a1a1a}
+.n-pill{width:44px;height:5px;border-radius:3px;background:#0a0a0a}
+.screen-wrap{
+  width:100%;height:100%;
+  border-radius:38px;overflow:hidden;
+  background:#f8fafc;position:relative;
 }
 
-/* ── SCREEN SYSTEM ── */
-.screen{
-  position:absolute;
-  inset:0;
-  display:none;
-  flex-direction:column;
-  background:var(--gray-50);
-  overflow:hidden;
-}
+/* ── SCREENS ── */
+.screen{position:absolute;inset:0;display:none;flex-direction:column;overflow:hidden}
 .screen.active{display:flex}
 
 /* ── STATUS BAR ── */
-.status-bar{
-  height:44px;
-  background:var(--navy);
-  display:flex;
-  align-items:flex-end;
+.sbar{
+  height:42px;background:var(--navy);
+  display:flex;align-items:flex-end;
   justify-content:space-between;
-  padding:0 20px 6px;
-  flex-shrink:0;
-  z-index:50;
+  padding:0 18px 6px;flex-shrink:0;
 }
-.status-time{color:#fff;font-size:13px;font-weight:600;letter-spacing:.02em}
-.status-icons{display:flex;align-items:center;gap:5px}
-.status-icons svg{fill:white}
+.stime{color:#fff;font-size:13px;font-weight:700;letter-spacing:.03em}
+.sicons{display:flex;align-items:center;gap:4px}
+.sicons svg{fill:white}
 
 /* ── APP HEADER ── */
-.app-header{
+.aheader{
   background:var(--navy);
-  padding:12px 16px 14px;
-  flex-shrink:0;
-  z-index:40;
+  padding:10px 14px 12px;flex-shrink:0;
 }
-.header-top{display:flex;align-items:center;gap:10px;margin-bottom:2px}
-.header-back{
-  width:32px;height:32px;border-radius:8px;
-  background:rgba(255,255,255,.1);
-  border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;flex-shrink:0;
-  transition:background .15s;
+.ah-row{display:flex;align-items:center;gap:9px}
+.back-btn{
+  width:34px;height:34px;border-radius:9px;
+  background:rgba(255,255,255,.1);border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:#fff;flex-shrink:0;transition:background .15s;
 }
-.header-back:hover{background:rgba(255,255,255,.18)}
-.header-title{color:#fff;font-size:16px;font-weight:700;flex:1;line-height:1.2}
-.header-subtitle{color:rgba(255,255,255,.6);font-size:12px;line-height:1.3;padding-left:42px}
-.order-badge{
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.2);
-  color:#fff;
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  padding:3px 8px;
-  border-radius:6px;
-  white-space:nowrap;
+.back-btn:hover{background:rgba(255,255,255,.18)}
+.ah-title{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;flex:1;line-height:1;letter-spacing:.01em}
+.ah-sub{color:rgba(255,255,255,.5);font-size:11px;margin-top:3px;padding-left:0;font-weight:400}
+.otag{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+  color:rgba(255,255,255,.8);font-size:9px;font-weight:700;
+  padding:3px 7px;border-radius:5px;letter-spacing:.04em;
+  white-space:nowrap;font-family:'DM Sans',sans-serif;
 }
 
-/* ── TABS ── */
-.tab-bar{
-  display:flex;
-  background:var(--navy-dark);
-  border-bottom:1px solid rgba(255,255,255,.1);
+/* ── TAB BAR ── */
+.tabs{
+  display:flex;background:var(--navy-d);
+  border-bottom:2px solid rgba(255,255,255,.06);
   flex-shrink:0;
 }
-.tab-item{
-  flex:1;
-  padding:10px 4px;
-  color:rgba(255,255,255,.45);
-  font-size:12px;
-  font-weight:500;
-  text-align:center;
-  cursor:pointer;
-  border-bottom:2px solid transparent;
-  transition:all .15s;
+.tab{
+  flex:1;padding:10px 4px 8px;
+  color:rgba(255,255,255,.38);font-size:12px;font-weight:600;
+  text-align:center;cursor:pointer;
+  border-bottom:3px solid transparent;
+  transition:all .15s;position:relative;
+}
+.tab.on{color:#fff;border-bottom-color:var(--teal)}
+.tbadge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:17px;height:17px;background:var(--green);color:#fff;
+  border-radius:50%;font-size:9px;font-weight:800;
+  margin-left:4px;vertical-align:middle;
+}
+.tnew{
+  background:var(--teal);color:var(--navy);
+  font-size:8px;font-weight:800;padding:1px 5px;
+  border-radius:3px;margin-left:4px;vertical-align:middle;
+  letter-spacing:.04em;text-transform:uppercase;
+}
+
+/* ── SCROLL ── */
+.scroll{flex:1;overflow-y:auto;padding:10px}
+.scroll::-webkit-scrollbar{width:0}
+
+/* ════════════════════════════
+   FORM STATE CARDS — núcleo del rediseño
+   Cada estado tiene un lenguaje visual propio
+════════════════════════════ */
+.fcard{
+  border-radius:14px;margin-bottom:10px;
+  overflow:hidden;cursor:pointer;
+  transition:transform .12s,box-shadow .12s;
   position:relative;
-}
-.tab-item.active{
-  color:#fff;
-  border-bottom-color:var(--teal);
-}
-.tab-badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:16px;height:16px;
-  background:var(--teal);
-  color:var(--navy);
-  border-radius:50%;
-  font-size:9px;
-  font-weight:700;
-  margin-left:4px;
-  vertical-align:middle;
-}
-.tab-new-badge{
-  position:absolute;
-  top:6px;right:18px;
-  width:6px;height:6px;
-  background:var(--teal);
-  border-radius:50%;
-}
-
-/* ── SCROLL AREA ── */
-.scroll-area{
-  flex:1;
-  overflow-y:auto;
-  padding:12px;
-  scroll-behavior:smooth;
-}
-.scroll-area::-webkit-scrollbar{width:0}
-
-/* ── BOTTOM NAV ── */
-.bottom-nav{
-  height:var(--bottom-h);
+  border:1.5px solid var(--border);
   background:#fff;
-  border-top:1px solid var(--gray-200);
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 12px;
-  flex-shrink:0;
 }
-.btn-prev,.btn-next{
-  height:44px;
-  border-radius:10px;
-  border:none;
-  font-size:13px;
-  font-weight:600;
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  transition:all .15s;
-}
-.btn-prev{
-  background:var(--gray-100);
-  color:var(--gray-700);
-  width:80px;flex-shrink:0;
-}
-.btn-next{
-  background:var(--navy);
-  color:#fff;
-  flex:1;
-}
-.btn-next:hover{background:var(--navy-light)}
-.btn-next.teal{background:var(--teal);color:var(--navy)}
-.btn-next.red{background:#c92a2a;color:#fff}
+.fcard:active{transform:scale(.98)}
 
-/* ── CARDS ── */
-.card{
-  background:#fff;
-  border-radius:14px;
-  border:1px solid var(--gray-200);
-  margin-bottom:10px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:all .15s;
+/* Tira de color lateral — el lenguaje del estado */
+.fcard::before{
+  content:'';position:absolute;
+  left:0;top:0;bottom:0;width:5px;
+  border-radius:14px 0 0 14px;
 }
-.card:hover{border-color:var(--navy);transform:translateY(-1px);box-shadow:0 4px 12px rgba(15,42,74,.1)}
-.card-header{
-  padding:12px 14px 10px;
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-}
-.card-avatar{
-  width:38px;height:38px;border-radius:10px;
+.fcard.mine::before{background:var(--teal)}
+.fcard.free::before{background:var(--green)}
+.fcard.readonly::before{background:var(--amber)}
+.fcard.done::before{background:#d1d5db}
+.fcard.collab::before{background:var(--navy)}
+
+/* Fondos sutiles por estado */
+.fcard.free{background:#f0fdf4;border-color:#bbf7d0}
+.fcard.mine{background:#f0fdfa;border-color:#99f6e4}
+.fcard.readonly{background:#fffbeb;border-color:#fde68a}
+.fcard.done{background:#f9fafb;border-color:#e5e7eb;opacity:.72}
+
+/* ── CARD BODY ── */
+.fc-body{padding:12px 12px 10px 16px;display:flex;align-items:flex-start;gap:10px}
+.fc-icon{
+  width:42px;height:42px;border-radius:11px;
   display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;flex-shrink:0;
+  font-size:20px;flex-shrink:0;
 }
-.card-info{flex:1;min-width:0}
-.card-order{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--gray-600);margin-bottom:2px}
-.card-site{font-size:14px;font-weight:600;color:var(--gray-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-meta{font-size:11px;color:var(--gray-500);margin-top:2px}
-.card-footer{
-  padding:8px 14px 10px;
-  border-top:1px solid var(--gray-100);
-  display:flex;align-items:center;justify-content:space-between;
-  gap:8px;
+.fcard.mine .fc-icon{background:var(--teal-l)}
+.fcard.free .fc-icon{background:var(--green-l)}
+.fcard.readonly .fc-icon{background:var(--amber-l)}
+.fcard.done .fc-icon{background:var(--gray-l)}
+.fcard.collab .fc-icon{background:#e0e7ff}
+.fc-info{flex:1;min-width:0}
+.fc-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:17px;font-weight:700;color:var(--text);
+  line-height:1.1;margin-bottom:4px;letter-spacing:.01em;
 }
+.fc-who{
+  display:flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:500;
+}
+.who-av{
+  width:18px;height:18px;border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;font-weight:800;flex-shrink:0;
+}
+.fcard.mine .who-av{background:var(--teal);color:var(--navy)}
+.fcard.free .who-av{background:var(--green);color:#fff}
+.fcard.readonly .who-av{background:var(--amber);color:#fff}
+.fcard.done .who-av{background:#d1d5db;color:#6b7280}
+.fcard.collab .who-av{background:var(--navy);color:#fff}
 
-/* ── BADGES / PILLS ── */
-.badge{
+/* ── STATE PILL ── */
+.spill{
   display:inline-flex;align-items:center;gap:4px;
-  padding:3px 8px;border-radius:20px;
-  font-size:10px;font-weight:600;letter-spacing:.02em;
-  white-space:nowrap;flex-shrink:0;
+  padding:4px 9px;border-radius:20px;
+  font-size:11px;font-weight:700;
+  white-space:nowrap;letter-spacing:.01em;flex-shrink:0;
+  align-self:flex-start;
 }
-.badge-open{background:var(--blue-light);color:var(--blue)}
-.badge-mine{background:var(--teal-light);color:#007a63}
-.badge-other{background:var(--purple-light);color:var(--purple)}
-.badge-free{background:var(--green-light);color:var(--green)}
-.badge-done{background:var(--gray-100);color:var(--gray-600)}
-.badge-readonly{background:var(--amber-light);color:#a16207}
+.fcard.mine .spill{background:var(--teal-l);color:var(--teal-d)}
+.fcard.free .spill{background:var(--green-l);color:var(--green-d)}
+.fcard.readonly .spill{background:var(--amber-l);color:var(--amber-d)}
+.fcard.done .spill{background:var(--gray-l);color:var(--gray)}
+.fcard.collab .spill{background:#e0e7ff;color:#4338ca}
 
-/* ── FORM ROWS (lista formularios) ── */
-.form-row{
-  background:#fff;
-  border-radius:12px;
-  border:1px solid var(--gray-200);
-  margin-bottom:8px;
-  padding:12px 14px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  cursor:pointer;
-  transition:all .15s;
+/* ── ACTION FOOTER — el gran cambio ── */
+.fc-action{
+  margin:0 12px 12px 16px;
+  display:flex;gap:8px;
 }
-.form-row:hover{border-color:var(--navy-light)}
-.form-row.readonly{background:var(--gray-50)}
-.form-icon{
-  width:38px;height:38px;border-radius:10px;
-  background:var(--navy);
+.btn-act{
+  flex:1;height:40px;border:none;border-radius:10px;
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap=6px;gap:6px;
+  transition:all .12s;letter-spacing:.01em;
+}
+.btn-act:active{transform:scale(.97)}
+.btn-take{background:var(--green);color:#fff}
+.btn-take:hover{background:var(--green-d)}
+.btn-reassign{background:var(--amber);color:#fff}
+.btn-reassign:hover{background:var(--amber-d)}
+.btn-view{background:var(--gray-l);color:var(--gray-d)}
+.btn-view:hover{background:#e5e7eb}
+.btn-edit{background:var(--navy);color:#fff}
+.btn-edit:hover{background:var(--navy-l)}
+.btn-continue{background:var(--teal);color:var(--navy)}
+.btn-continue:hover{background:var(--teal-d)}
+
+/* ── PROGRESS ── */
+.fc-prog{
+  height:3px;background:#e5e7eb;border-radius:0 0 0 0;
+  margin:0 0 0 16px;
+}
+.fc-prog-fill{height:100%;border-radius:0}
+.fcard.mine .fc-prog-fill{background:var(--teal)}
+.fcard.free .fc-prog-fill{background:var(--green)}
+.fcard.done .fc-prog-fill{background:#9ca3af}
+
+/* ── ORDER CARD ── */
+.ocard{
+  background:#fff;border-radius:14px;
+  border:1.5px solid var(--border);
+  margin-bottom:10px;cursor:pointer;
+  transition:all .12s;overflow:hidden;
+}
+.ocard:active{transform:scale(.98)}
+.oc-head{padding:12px 14px 10px;display:flex;align-items:flex-start;gap:10px}
+.oc-av{
+  width:42px;height:42px;border-radius:11px;
   display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-  font-size:16px;
+  font-size:14px;font-weight:800;flex-shrink:0;
 }
-.form-info{flex:1;min-width:0}
-.form-name{font-size:13px;font-weight:600;color:var(--gray-900);margin-bottom:3px}
-.form-assignee{font-size:11px;color:var(--gray-500);display:flex;align-items:center;gap:4px}
-.form-assignee .dot{width:6px;height:6px;border-radius:50%;background:var(--gray-400);flex-shrink:0}
-.form-assignee .dot.mine{background:var(--teal)}
-.form-assignee .dot.other{background:var(--purple)}
-.form-assignee .dot.free{background:var(--green)}
-.form-status-col{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.oc-info{flex:1;min-width:0}
+.oc-order{font-size:9px;font-weight:700;color:var(--text-2);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.oc-site{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:var(--text);line-height:1.1}
+.oc-meta{font-size:11px;color:var(--text-2);margin-top:2px}
+.oc-foot{
+  padding:8px 14px 10px;
+  border-top:1px solid var(--gray-l);
+  display:flex;align-items:center;gap:8px;
+}
+.prog-wrap{height:4px;flex:1;background:#e5e7eb;border-radius:2px}
+.prog-fill{height:100%;border-radius:2px}
+
+/* ── FREE COUNT BADGE ── */
+.free-badge{
+  background:var(--green);color:#fff;
+  font-size:10px;font-weight:800;
+  padding:3px 9px;border-radius:20px;
+  white-space:nowrap;letter-spacing:.02em;
+}
+.collab-badge{
+  background:var(--navy);color:#fff;
+  font-size:10px;font-weight:800;
+  padding:3px 9px;border-radius:20px;
+}
+.readonly-badge{
+  background:var(--amber-l);color:var(--amber-d);
+  font-size:10px;font-weight:800;
+  padding:3px 9px;border-radius:20px;
+}
+
+/* ── MODE BANNER (dentro del form) — lo más visible del rediseño ── */
+.mode-banner{
+  padding:11px 14px;flex-shrink:0;
+  display:flex;align-items:center;gap:10px;
+}
+.mode-banner.writing{background:var(--teal);color:var(--navy)}
+.mode-banner.reading{background:var(--amber);color:#fff}
+.mb-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.mode-banner.writing .mb-icon{background:rgba(255,255,255,.25)}
+.mode-banner.reading .mb-icon{background:rgba(0,0,0,.12)}
+.mb-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:20px;font-weight:800;letter-spacing:.03em;line-height:1;
+}
+.mb-sub{font-size:11px;opacity:.8;margin-top:1px;font-weight:500}
+.mb-action{
+  margin-left:auto;
+  height:34px;padding:0 12px;
+  border:none;border-radius:8px;
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;gap:5px;
+  white-space:nowrap;transition:all .12s;
+}
+.mode-banner.writing .mb-action{background:rgba(255,255,255,.25);color:var(--navy)}
+.mode-banner.reading .mb-action{background:#fff;color:var(--amber-d)}
 
 /* ── STEP PILLS ── */
-.step-pills{
-  display:flex;gap:6px;overflow-x:auto;padding:10px 14px;
-  background:var(--navy);
-  flex-shrink:0;
+.pills{
+  display:flex;gap:5px;overflow-x:auto;
+  padding:8px 12px;background:var(--navy);flex-shrink:0;
 }
-.step-pills::-webkit-scrollbar{height:0}
-.step-pill{
-  display:flex;align-items:center;gap:5px;
-  background:rgba(255,255,255,.1);
-  border-radius:20px;
-  padding:5px 10px;
-  white-space:nowrap;
-  font-size:11px;color:rgba(255,255,255,.6);
-  cursor:pointer;flex-shrink:0;
+.pills::-webkit-scrollbar{height:0}
+.pill{
+  display:flex;align-items:center;gap:4px;
+  background:rgba(255,255,255,.08);border-radius:20px;
+  padding:5px 10px;white-space:nowrap;
+  font-size:11px;color:rgba(255,255,255,.5);
+  cursor:pointer;flex-shrink:0;font-weight:500;
+  transition:all .15s;
 }
-.step-pill.active{background:#fff;color:var(--navy);font-weight:600}
-.step-pill.done{background:rgba(0,200,160,.2);color:var(--teal)}
+.pill.on{background:#fff;color:var(--navy);font-weight:700}
+.pill.done{background:rgba(0,200,160,.2);color:var(--teal);font-weight:600}
 
 /* ── META BAR ── */
-.meta-bar{
-  background:rgba(15,42,74,.04);
-  border-bottom:1px solid var(--gray-200);
-  padding:8px 14px;
-  display:flex;gap:16px;flex-shrink:0;
+.meta{
+  background:#fff;border-bottom:1px solid var(--border);
+  padding:7px 14px;display:flex;gap:16px;flex-shrink:0;
 }
-.meta-item{display:flex;align-items:center;gap:5px}
-.meta-label{font-size:10px;color:var(--gray-500);font-weight:500;letter-spacing:.03em}
-.meta-value{font-size:11px;color:var(--gray-800);font-weight:600}
+.meta-i{display:flex;flex-direction:column;gap:1px}
+.meta-l{font-size:9px;font-weight:700;color:var(--text-2);letter-spacing:.06em;text-transform:uppercase}
+.meta-v{font-size:12px;font-weight:600;color:var(--text)}
 
-/* ── ASSIGNEE BAR (nuevo) ── */
-.assignee-bar{
-  padding:9px 14px;
+/* ── FIELD GROUPS ── */
+.fgroup{background:#fff;border-radius:13px;border:1px solid var(--border);margin-bottom:10px;overflow:hidden}
+.fgtitle{
+  padding:9px 14px 7px;
+  font-size:10px;font-weight:800;color:var(--text-2);
+  letter-spacing:.07em;text-transform:uppercase;
+  border-bottom:1px solid var(--gray-l);
+  background:var(--gray-l);
+}
+.frow{padding:9px 14px;border-bottom:1px solid var(--gray-l)}
+.frow:last-child{border-bottom:none}
+.flabel{font-size:11px;font-weight:600;color:var(--text-2);margin-bottom:4px}
+.finput{
+  width:100%;height:38px;
+  border:1.5px solid var(--border);border-radius:9px;
+  padding:0 11px;font-size:13px;
+  font-family:'DM Sans',sans-serif;color:var(--text);
+  background:#fff;outline:none;transition:border .15s;
+}
+.finput:focus{border-color:var(--navy)}
+.finput.ro{background:var(--gray-l);color:#9ca3af;cursor:not-allowed;border-color:transparent}
+.fselect{
+  width:100%;height:38px;
+  border:1.5px solid var(--border);border-radius:9px;
+  padding:0 11px;font-size:13px;
+  font-family:'DM Sans',sans-serif;color:var(--text);
+  background:#fff;outline:none;-webkit-appearance:none;
+}
+.fselect.ro{background:var(--gray-l);color:#9ca3af;pointer-events:none;border-color:transparent}
+
+/* ── CHECK ITEMS ── */
+.chk{padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--gray-l)}
+.chk:last-child{border-bottom:none}
+.cbox{
+  width:22px;height:22px;border-radius:7px;
+  border:2px solid var(--border);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .12s;
+}
+.cbox.on{background:var(--navy);border-color:var(--navy)}
+.cbox.ro{background:var(--gray-l);border-color:transparent}
+.clabel{font-size:13px;color:var(--text);font-weight:400}
+.clabel.ro{color:#9ca3af}
+
+/* ── PHOTO SLOTS ── */
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 14px}
+.pslot{
+  border-radius:10px;height:76px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;
+  cursor:pointer;transition:all .12s;
+  border:2px dashed #d1d5db;background:var(--gray-l);
+}
+.pslot:hover{border-color:var(--navy);background:#e0e7ff22}
+.pslot.ro{cursor:not-allowed;opacity:.5}
+.pslot.has{background:#e5e7eb;border-style:solid;border-color:#d1d5db}
+.plab{font-size:9px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:.05em}
+
+/* ── BOTTOM NAV ── */
+.bnav{
+  height:72px;background:#fff;
+  border-top:1px solid var(--border);
   display:flex;align-items:center;gap:8px;
-  flex-shrink:0;
+  padding:8px 12px;flex-shrink:0;
 }
-.assignee-bar.writer{
-  background:#e0faf4;
-  border-bottom:1px solid #b8f2e6;
+.btn-prev{
+  height:46px;width:76px;background:var(--gray-l);
+  color:var(--gray-d);border:none;border-radius:11px;
+  font-size:13px;font-weight:700;cursor:pointer;
+  flex-shrink:0;font-family:'DM Sans',sans-serif;
+  transition:background .12s;
 }
-.assignee-bar.reader{
-  background:#fff9db;
-  border-bottom:1px solid #ffe066;
+.btn-prev:hover{background:#e5e7eb}
+.btn-cta{
+  flex:1;height:46px;border:none;border-radius:11px;
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  transition:all .12s;letter-spacing:.01em;
 }
-.assignee-icon{
-  width:28px;height:28px;border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;flex-shrink:0;
-}
-.assignee-icon.writer{background:var(--teal);color:var(--navy)}
-.assignee-icon.reader{background:#ffe066;color:#7a5d00}
-.assignee-text{flex:1}
-.assignee-text .at-label{font-size:10px;color:var(--gray-500);font-weight:500}
-.assignee-text .at-name{font-size:12px;font-weight:600}
-.assignee-text.writer .at-name{color:#007a63}
-.assignee-text.reader .at-name{color:#7a5d00}
-.btn-take{
-  background:var(--navy);
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  padding:7px 12px;
-  font-size:11px;font-weight:600;
-  cursor:pointer;
-  white-space:nowrap;
-  display:flex;align-items:center;gap:4px;
-  transition:background .15s;
-}
-.btn-take:hover{background:var(--navy-light)}
+.btn-cta.navy{background:var(--navy);color:#fff}
+.btn-cta.teal{background:var(--teal);color:var(--navy)}
+.btn-cta.amber{background:var(--amber);color:#fff}
+.btn-cta.green{background:var(--green);color:#fff}
+.btn-cta:active{transform:scale(.98)}
 
-/* ── FORM FIELDS ── */
-.field-group{background:#fff;border-radius:12px;border:1px solid var(--gray-200);margin-bottom:10px;overflow:hidden}
-.field-group-title{padding:10px 14px 8px;font-size:11px;font-weight:700;color:var(--gray-600);letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid var(--gray-100);background:var(--gray-50)}
-.field-row{padding:10px 14px;border-bottom:1px solid var(--gray-100)}
-.field-row:last-child{border-bottom:none}
-.field-label{font-size:11px;font-weight:600;color:var(--gray-600);margin-bottom:5px}
-.field-input{
-  width:100%;
-  height:36px;
-  border:1px solid var(--gray-300);
-  border-radius:8px;
-  padding:0 10px;
-  font-size:13px;
-  font-family:'Inter',sans-serif;
-  color:var(--gray-900);
-  background:#fff;
-  outline:none;
-  transition:border .15s;
-}
-.field-input:focus{border-color:var(--navy)}
-.field-input.disabled{
-  background:var(--gray-100);
-  color:var(--gray-500);
-  cursor:not-allowed;
-  border-color:var(--gray-200);
-}
-.field-select{
-  width:100%;height:36px;
-  border:1px solid var(--gray-300);
-  border-radius:8px;
-  padding:0 10px;
-  font-size:13px;
-  font-family:'Inter',sans-serif;
-  color:var(--gray-900);
-  background:#fff;
-  outline:none;
-  -webkit-appearance:none;
-}
-.field-select.disabled{
-  background:var(--gray-100);
-  color:var(--gray-500);
-  pointer-events:none;
-  border-color:var(--gray-200);
-}
-
-/* ── CHECKLIST ITEM ── */
-.check-item{
-  padding:10px 14px;
-  display:flex;align-items:center;gap:10px;
-  border-bottom:1px solid var(--gray-100);
-}
-.check-item:last-child{border-bottom:none}
-.checkbox{
-  width:20px;height:20px;border-radius:6px;
-  border:2px solid var(--gray-300);
-  flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-}
-.checkbox.checked{background:var(--navy);border-color:var(--navy)}
-.checkbox.disabled{background:var(--gray-100);border-color:var(--gray-200)}
-.check-label{font-size:12px;color:var(--gray-800);flex:1}
-.check-label.disabled{color:var(--gray-400)}
-
-/* ── READONLY OVERLAY ── */
-.readonly-notice{
-  background:var(--amber-light);
-  border:1px solid #ffe066;
-  border-radius:10px;
-  padding:10px 12px;
-  margin-bottom:10px;
-  display:flex;align-items:flex-start;gap:8px;
-}
-.readonly-notice .rn-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-.readonly-notice .rn-text{font-size:11px;color:#7a5d00;line-height:1.4}
-.readonly-notice .rn-text strong{font-weight:700}
-
-/* ── TOAST NOTIFICATION ── */
+/* ── TOAST ── */
 .toast{
-  position:absolute;
-  top:54px;left:12px;right:12px;
-  background:var(--navy);
-  color:#fff;
-  border-radius:12px;
-  padding:12px 14px;
-  display:flex;align-items:flex-start;gap:10px;
-  z-index:200;
-  box-shadow:0 8px 24px rgba(0,0,0,.3);
-  animation:slideDown .3s ease;
+  position:absolute;top:52px;left:10px;right:10px;
+  background:#1f2937;color:#fff;border-radius:13px;
+  padding:12px 14px;display:flex;align-items:flex-start;gap:10px;
+  z-index:200;box-shadow:0 8px 32px rgba(0,0,0,.4);
+  animation:tsld .3s ease;border:1px solid #374151;
 }
-@keyframes slideDown{from{transform:translateY(-12px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes tsld{from{transform:translateY(-10px);opacity:0}to{transform:translateY(0);opacity:1}}
 .toast-icon{
-  width:32px;height:32px;border-radius:8px;
-  background:rgba(255,255,255,.1);
+  width:34px;height:34px;border-radius:9px;
+  background:rgba(255,255,255,.08);
   display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-size:16px;
+  font-size:16px;flex-shrink:0;
 }
 .toast-body{flex:1}
-.toast-title{font-size:13px;font-weight:700;margin-bottom:2px}
-.toast-desc{font-size:11px;color:rgba(255,255,255,.7);line-height:1.4}
-.toast-close{color:rgba(255,255,255,.5);cursor:pointer;font-size:16px;align-self:flex-start;flex-shrink:0}
+.toast-title{font-size:13px;font-weight:700;margin-bottom:2px;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:.02em}
+.toast-desc{font-size:11px;color:rgba(255,255,255,.65);line-height:1.45}
+.toast-x{color:rgba(255,255,255,.4);cursor:pointer;font-size:15px;flex-shrink:0}
 
-/* ── MODAL ── */
-.modal-backdrop{
+/* ── MODAL SHEET ── */
+.mback{
   position:absolute;inset:0;
-  background:rgba(0,0,0,.5);
-  z-index:150;
+  background:rgba(0,0,0,.55);z-index:150;
   display:flex;align-items:flex-end;
 }
-.modal-sheet{
-  background:#fff;
-  border-radius:20px 20px 0 0;
-  width:100%;
-  padding:20px 20px 32px;
+.msheet{
+  background:#fff;border-radius:22px 22px 0 0;
+  width:100%;padding:20px 20px 36px;
 }
-.modal-handle{width:36px;height:4px;background:var(--gray-300);border-radius:2px;margin:0 auto 18px}
-.modal-title{font-size:17px;font-weight:700;color:var(--gray-900);margin-bottom:6px}
-.modal-desc{font-size:13px;color:var(--gray-600);line-height:1.5;margin-bottom:20px}
-.modal-info{
-  background:var(--gray-50);border-radius:10px;
-  padding:12px 14px;margin-bottom:20px;
+.mhandle{width:38px;height:4px;background:#e5e7eb;border-radius:2px;margin:0 auto 18px}
+.mhead{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.mhead-icon{
+  width:50px;height:50px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;flex-shrink:0;
 }
-.modal-info-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.modal-info-row:last-child{margin-bottom:0}
-.modal-info-label{font-size:11px;color:var(--gray-500);font-weight:500}
-.modal-info-val{font-size:12px;color:var(--gray-800);font-weight:600}
-.modal-btn-primary{
-  width:100%;height:46px;
-  background:var(--navy);color:#fff;
-  border:none;border-radius:12px;
-  font-size:14px;font-weight:600;
-  cursor:pointer;margin-bottom:8px;
-  transition:background .15s;
+.mtitle{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--text);letter-spacing:.01em}
+.msub{font-size:12px;color:var(--text-2);font-weight:500}
+.mdesc{font-size:13px;color:#4b5563;line-height:1.5;margin-bottom:16px}
+.minfo{background:var(--gray-l);border-radius:11px;padding:12px 14px;margin-bottom:18px}
+.minfo-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:5px 0;border-bottom:1px solid var(--border);
 }
-.modal-btn-primary:hover{background:var(--navy-light)}
-.modal-btn-primary.teal{background:var(--teal);color:var(--navy)}
-.modal-btn-secondary{
-  width:100%;height:40px;
-  background:transparent;color:var(--gray-600);
-  border:1px solid var(--gray-300);border-radius:12px;
+.minfo-row:last-child{border-bottom:none;padding-bottom:0}
+.minfo-l{font-size:11px;color:var(--text-2);font-weight:500}
+.minfo-v{font-size:12px;color:var(--text);font-weight:700}
+.mbtn-p{
+  width:100%;height:50px;border:none;border-radius:13px;
+  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;
+  cursor:pointer;transition:all .12s;margin-bottom:8px;
+}
+.mbtn-p.green{background:var(--green);color:#fff}
+.mbtn-p.amber{background:var(--amber);color:#fff}
+.mbtn-s{
+  width:100%;height:42px;background:transparent;
+  color:var(--text-2);border:1.5px solid var(--border);
+  border-radius:11px;font-family:'DM Sans',sans-serif;
   font-size:13px;font-weight:500;cursor:pointer;
 }
 
 /* ── SECTION LABEL ── */
-.section-label{
-  font-size:10px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--gray-500);
-  margin:14px 2px 6px;
+.slabel{
+  font-size:10px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--text-2);
+  margin:12px 2px 7px;display:block;
 }
-
-/* ── INSPECTOR AVATAR ── */
-.inspector-chip{
-  display:inline-flex;align-items:center;gap:5px;
-  background:var(--navy);
-  border-radius:20px;
-  padding:3px 8px 3px 4px;
-}
-.inspector-chip .ic-av{
-  width:18px;height:18px;border-radius:50%;
-  background:var(--teal);
-  display:flex;align-items:center;justify-content:center;
-  font-size:8px;font-weight:800;color:var(--navy);
-}
-.inspector-chip .ic-name{font-size:10px;color:#fff;font-weight:600}
-
-/* ── PROGRESS BAR ── */
-.prog-bar-wrap{height:3px;background:var(--gray-200);border-radius:2px;flex:1}
-.prog-bar-fill{height:100%;border-radius:2px;background:var(--teal);transition:width .3s}
 
 /* ── EMPTY STATE ── */
-.empty-state{
-  display:flex;flex-direction:column;align-items:center;
-  padding:40px 20px;text-align:center;
-}
-.empty-icon{font-size:40px;margin-bottom:12px;opacity:.4}
-.empty-title{font-size:15px;font-weight:600;color:var(--gray-700);margin-bottom:4px}
-.empty-desc{font-size:13px;color:var(--gray-500)}
+.empty{padding:40px 20px;text-align:center}
+.empty-emoji{font-size:38px;margin-bottom:10px;display:block;opacity:.5}
+.empty-t{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;color:var(--gray-d);margin-bottom:4px}
+.empty-d{font-size:12px;color:var(--text-2)}
 
-/* ── PHOTO SLOT ── */
-.photo-slot{
-  background:var(--gray-100);
-  border:2px dashed var(--gray-300);
-  border-radius:10px;
-  height:80px;
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:4px;
-  cursor:pointer;
-  transition:all .15s;
+/* ── HOME HERO ── */
+.hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-l) 100%);
+  padding:12px 14px 14px;
 }
-.photo-slot:hover{border-color:var(--navy);background:var(--blue-light)}
-.photo-slot.disabled{cursor:not-allowed;opacity:.5}
-.photo-slot.has-photo{
-  background:var(--gray-200);
-  border-style:solid;
-  border-color:var(--gray-300);
-  position:relative;overflow:hidden;
-}
-.photo-label{font-size:10px;color:var(--gray-500);font-weight:500}
-
-/* ── NEW BADGE ── */
-.feature-tag{
-  display:inline-flex;align-items:center;gap:3px;
+.hero-greeting{color:rgba(255,255,255,.55);font-size:11px;font-weight:500;margin-bottom:2px}
+.hero-name{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;letter-spacing:.01em;line-height:1}
+.avatar-lg{
+  width:42px;height:42px;border-radius:12px;
   background:var(--teal);color:var(--navy);
-  font-size:9px;font-weight:800;
-  padding:2px 6px;border-radius:4px;
-  text-transform:uppercase;letter-spacing:.04em;
-  vertical-align:middle;margin-left:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;flex-shrink:0;
 }
 
-/* ── ANNOTATION ── */
-.annotation{
-  position:relative;
-  border:2px dashed #00C8A0;
-  border-radius:12px;
-  margin-bottom:10px;
+/* ── COLLAB BANNER ── */
+.collab-banner{
+  background:var(--navy);border-radius:12px;
+  padding:10px 13px;margin-bottom:10px;
+  display:flex;align-items:center;gap:9px;
 }
-.annotation::before{
-  content:attr(data-note);
-  position:absolute;
-  top:-10px;left:10px;
-  background:#00C8A0;
-  color:var(--navy);
-  font-size:9px;font-weight:800;
-  padding:1px 7px;border-radius:4px;
-  text-transform:uppercase;letter-spacing:.05em;
-  white-space:nowrap;
+.cb-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
 }
+.cb-body{flex:1}
+.cb-t{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:#fff;letter-spacing:.02em}
+.cb-s{font-size:10px;color:rgba(255,255,255,.55);font-weight:500;margin-top:1px}
 
-/* ── SCREEN LABEL (outside phone) ── */
-.screen-desc{
-  color:#8b949e;
-  font-size:12px;
-  text-align:center;
-  margin-top:16px;
-  max-width:390px;
-  line-height:1.5;
+/* ── ANNOTATIONS ── */
+.ann{border:2px dashed var(--teal);border-radius:14px;margin-bottom:10px;position:relative}
+.ann::before{
+  content:attr(data-n);
+  position:absolute;top:-9px;left:10px;
+  background:var(--teal);color:var(--navy);
+  font-size:8px;font-weight:800;padding:1px 7px;
+  border-radius:3px;text-transform:uppercase;letter-spacing:.06em;
+  font-family:'DM Sans',sans-serif;white-space:nowrap;
 }
-.screen-desc strong{color:#c9d1d9}
+.ann > *{border-radius:12px!important}
+
+/* ── SCREEN DESC ── */
+.sdesc{
+  color:#6b7280;font-size:12px;text-align:center;
+  margin-top:14px;max-width:390px;line-height:1.55;
+  font-family:'DM Sans',sans-serif;
+}
+.sdesc strong{color:#9ca3af}
+
+/* ── LEGEND DOTS ── */
+.ld-new{background:#00C8A0}
+.ld-mod{background:#d97706}
+.ld-same{background:#374151}
 
 </style>
 </head>
 <body>
 
-<!-- NAV LEGEND -->
-<div class="legend">
-  <div class="legend-title">Selecciona una pantalla para navegar</div>
-  <button class="leg-btn active" onclick="showScreen('s1',this)">
-    <span class="leg-dot leg-changed"></span>1. Home — Mis Órdenes
-  </button>
-  <button class="leg-btn" onclick="showScreen('s2',this)">
-    <span class="leg-dot leg-new"></span>2. Home — Mi Equipo
-  </button>
-  <button class="leg-btn" onclick="showScreen('s3',this)">
-    <span class="leg-dot leg-changed"></span>3. Formularios (Inspector A)
-  </button>
-  <button class="leg-btn" onclick="showScreen('s4',this)">
-    <span class="leg-dot leg-new"></span>4. Formularios (Inspector B)
-  </button>
-  <button class="leg-btn" onclick="showScreen('s5',this)">
-    <span class="leg-dot leg-new"></span>5. Formulario — Modo Lectura
-  </button>
-  <button class="leg-btn" onclick="showScreen('s6',this)">
-    <span class="leg-dot leg-same"></span>6. Formulario — Modo Escritura
-  </button>
-  <button class="leg-btn" onclick="showScreen('s7',this)">
-    <span class="leg-dot leg-new"></span>7. Modal — Tomar Formulario
-  </button>
-  <button class="leg-btn" onclick="showScreen('s8',this)">
-    <span class="leg-dot leg-new"></span>8. Toast — Reasignado offline
-  </button>
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-title">— Selecciona pantalla para navegar —</div>
+  <button class="nb active" onclick="show('s1',this)"><span class="dot ld-mod"></span>1. Home · Mis Órdenes</button>
+  <button class="nb" onclick="show('s2',this)"><span class="dot ld-new"></span>2. Home · Mi Equipo</button>
+  <button class="nb" onclick="show('s3',this)"><span class="dot ld-mod"></span>3. Forms · Inspector A</button>
+  <button class="nb" onclick="show('s4',this)"><span class="dot ld-new"></span>4. Forms · Inspector B</button>
+  <button class="nb" onclick="show('s5',this)"><span class="dot ld-new"></span>5. Form · Modo Lectura</button>
+  <button class="nb" onclick="show('s6',this)"><span class="dot ld-same"></span>6. Form · Modo Escritura</button>
+  <button class="nb" onclick="show('s7a',this)"><span class="dot ld-new"></span>7a. Modal · Tomar libre</button>
+  <button class="nb" onclick="show('s7b',this)"><span class="dot ld-new"></span>7b. Modal · Reasignar</button>
+  <button class="nb" onclick="show('s8',this)"><span class="dot ld-new"></span>8. Toast · Offline conflict</button>
 </div>
 
 <!-- PHONE -->
-<div class="phone-wrap">
-  <div class="phone-notch">
-    <div class="notch-cam"></div>
-    <div class="notch-speaker"></div>
+<div class="phone">
+  <div class="notch"><div class="n-cam"></div><div class="n-pill"></div></div>
+  <div class="screen-wrap">
+
+  <!-- ═══ S1: HOME — MIS ÓRDENES ═══ -->
+  <div class="screen active" id="s1">
+    <div class="sbar"><span class="stime">9:41</span><div class="sicons"><svg width="15" height="11" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="24" height="11" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="14" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+    <div class="hero">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="flex:1">
+          <div class="hero-greeting">Buenos días, Inspector</div>
+          <div class="hero-name">Carlos Martínez</div>
+        </div>
+        <div class="avatar-lg">CM</div>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab on">Mis Órdenes</div>
+      <div class="tab" onclick="show('s2',null)">Mi Equipo <span class="tbadge">3</span><span class="tnew">nuevo</span></div>
+    </div>
+    <div class="scroll">
+      <span class="slabel">Activas — 2</span>
+
+      <div class="ocard" onclick="show('s3',null)">
+        <div class="oc-head">
+          <div class="oc-av" style="background:#dbeafe;color:#1d4ed8;font-family:'Barlow Condensed',sans-serif">PA</div>
+          <div class="oc-info">
+            <div class="oc-order">OT-CENTRAL-2026-03-1036</div>
+            <div class="oc-site">Sitio PA-CH-1036</div>
+            <div class="oc-meta">Chiriquí · Iniciada hoy 08:14</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+            <span style="background:#dbeafe;color:#1d4ed8;font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px">Activa</span>
+            <span style="font-size:10px;color:var(--teal-d);font-weight:700">3/8 forms</span>
+          </div>
+        </div>
+        <div class="oc-foot">
+          <div class="prog-wrap"><div class="prog-fill" style="width:37%;background:var(--teal)"></div></div>
+          <span style="font-size:10px;color:var(--text-2);margin-left:8px;white-space:nowrap;font-weight:600">37%</span>
+        </div>
+      </div>
+
+      <div class="ocard">
+        <div class="oc-head">
+          <div class="oc-av" style="background:#ede9fe;color:#6d28d9;font-family:'Barlow Condensed',sans-serif">VE</div>
+          <div class="oc-info">
+            <div class="oc-order">OT-NORTE-2026-03-2204</div>
+            <div class="oc-site">Sitio VE-NR-2204</div>
+            <div class="oc-meta">Veraguas · Iniciada ayer</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+            <span style="background:#dbeafe;color:#1d4ed8;font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px">Activa</span>
+            <span style="font-size:10px;color:var(--text-2);font-weight:700">1/8 forms</span>
+          </div>
+        </div>
+        <div class="oc-foot">
+          <div class="prog-wrap"><div class="prog-fill" style="width:12%;background:var(--teal)"></div></div>
+          <span style="font-size:10px;color:var(--text-2);margin-left:8px;white-space:nowrap;font-weight:600">12%</span>
+        </div>
+      </div>
+
+      <span class="slabel">Completadas — 1</span>
+      <div class="ocard" style="opacity:.6">
+        <div class="oc-head">
+          <div class="oc-av" style="background:#dcfce7;color:#166534;font-family:'Barlow Condensed',sans-serif">CO</div>
+          <div class="oc-info">
+            <div class="oc-order">OT-CENTRAL-2026-03-0901</div>
+            <div class="oc-site">Sitio CO-CE-0901</div>
+            <div class="oc-meta">Coclé · 20/03/2026</div>
+          </div>
+          <span style="background:#f3f4f6;color:#6b7280;font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px;align-self:flex-start">✓ Completa</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:72px;background:#fff;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;padding:0 20px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><svg width="20" height="20" fill="none" stroke="var(--navy)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span style="font-size:9px;font-weight:700;color:var(--navy)">Inicio</span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.35"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><span style="font-size:9px;color:var(--text-2)">Buscar</span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.35"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span style="font-size:9px;color:var(--text-2)">Perfil</span></div>
+    </div>
   </div>
-  <div class="phone-screen">
 
-    <!-- ════════════════════════════════
-         SCREEN 1: HOME — MIS ÓRDENES (cambios mínimos)
-    ════════════════════════════════ -->
-    <div class="screen active" id="s1">
-      <div class="status-bar">
-        <span class="status-time">9:41</span>
-        <div class="status-icons">
-          <svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" opacity=".3"/></svg>
-          <svg width="14" height="12" viewBox="0 0 14 12"><path d="M7 3C4.5 3 2.3 4.1 1 5.8L0 4.6C1.6 2.5 4.2 1 7 1s5.4 1.5 7 3.6L13 5.8C11.7 4.1 9.5 3 7 3z" opacity=".5"/><path d="M7 5.5c-1.5 0-2.8.7-3.7 1.7L2.3 6.1C3.5 4.8 5.1 4 7 4s3.5.8 4.7 2.1l-1 1.1C9.8 6.2 8.5 5.5 7 5.5z" opacity=".7"/><path d="M7 8c-.9 0-1.7.4-2.2 1L3.7 7.8C4.5 6.9 5.7 6.5 7 6.5s2.5.4 3.3 1.3L9.2 9C8.7 8.4 7.9 8 7 8z"/><circle cx="7" cy="11" r="1.5"/></svg>
-          <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="14" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg>
+  <!-- ═══ S2: HOME — MI EQUIPO ═══ -->
+  <div class="screen" id="s2">
+    <div class="sbar"><span class="stime">9:41</span><div class="sicons"><svg width="15" height="11" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="24" height="11" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="10" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+    <div class="hero">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="flex:1">
+          <div class="hero-greeting">Buenos días, Inspector</div>
+          <div class="hero-name">Carlos Martínez</div>
+        </div>
+        <div class="avatar-lg">CM</div>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab" onclick="show('s1',null)">Mis Órdenes</div>
+      <div class="tab on">Mi Equipo <span class="tbadge">3</span></div>
+    </div>
+    <div class="scroll">
+
+      <!-- Info card mejorado -->
+      <div style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:12px;padding:11px 13px;margin-bottom:12px;display:flex;gap:9px;align-items:flex-start">
+        <span style="font-size:18px;flex-shrink:0">🤝</span>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#1e40af;margin-bottom:2px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em;font-size:14px">MODO COLABORACIÓN</div>
+          <div style="font-size:11px;color:#3b82f6;line-height:1.4">Puedes unirte a órdenes de tu equipo. Las tarjetas verdes tienen formularios disponibles para tomar.</div>
         </div>
       </div>
-      <div class="app-header">
-        <div class="header-top">
-          <div style="flex:1">
-            <div style="color:rgba(255,255,255,.6);font-size:11px;margin-bottom:2px">Inspector · PTI</div>
-            <div style="color:#fff;font-size:18px;font-weight:800;letter-spacing:-.01em">PTI Inspect</div>
+
+      <span class="slabel">Órdenes del equipo — 3</span>
+
+      <!-- Orden con forms libres — VERDE / destacada -->
+      <div class="ocard" style="border-color:#bbf7d0;background:#f0fdf4" onclick="show('s4',null)">
+        <div style="background:var(--green);height:4px;border-radius:4px 4px 0 0"></div>
+        <div class="oc-head">
+          <div class="oc-av" style="background:#dcfce7;color:#166534;font-family:'Barlow Condensed',sans-serif">DA</div>
+          <div class="oc-info">
+            <div class="oc-order">OT-CENTRAL-2026-03-1044</div>
+            <div class="oc-site">Sitio PA-CH-1044</div>
+            <div class="oc-meta">Inspector D. Alvarado · Chiriquí</div>
           </div>
-          <div style="width:36px;height:36px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--navy)">CM</div>
+          <span class="free-badge">2 libres</span>
+        </div>
+        <div style="padding:0 14px 10px;display:flex;gap:6px">
+          <div style="background:#dcfce7;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;color:var(--green-d);display:flex;align-items:center;gap:4px">
+            <span>📦</span> Inventario v2
+          </div>
+          <div style="background:#dcfce7;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;color:var(--green-d);display:flex;align-items:center;gap:4px">
+            <span>🗼</span> Sis. Ascenso
+          </div>
+        </div>
+        <div class="oc-foot" style="border-top:1px solid #bbf7d0">
+          <div class="prog-wrap"><div class="prog-fill" style="width:25%;background:var(--green)"></div></div>
+          <span style="font-size:10px;color:var(--green-d);margin-left:8px;white-space:nowrap;font-weight:700">2/8 completos</span>
         </div>
       </div>
-      <!-- TABS (modificado) -->
-      <div class="tab-bar">
-        <div class="tab-item active">Mis Órdenes</div>
-        <div class="tab-item" onclick="showScreen('s2',null)">
-          Mi Equipo
-          <span class="tab-badge">3</span>
-          <span class="feature-tag">nuevo</span>
+
+      <!-- Orden en progreso sin libres -->
+      <div class="ocard" style="border-color:#fde68a;background:#fffbeb">
+        <div style="background:var(--amber);height:4px;border-radius:4px 4px 0 0"></div>
+        <div class="oc-head">
+          <div class="oc-av" style="background:#ede9fe;color:#6d28d9;font-family:'Barlow Condensed',sans-serif">RL</div>
+          <div class="oc-info">
+            <div class="oc-order">OT-NORTE-2026-03-3110</div>
+            <div class="oc-site">Sitio PAN-NR-3110</div>
+            <div class="oc-meta">Inspector R. López · Coclé</div>
+          </div>
+          <span class="readonly-badge">En progreso</span>
+        </div>
+        <div class="oc-foot" style="border-top:1px solid #fde68a">
+          <div class="prog-wrap"><div class="prog-fill" style="width:50%;background:var(--amber)"></div></div>
+          <span style="font-size:10px;color:var(--amber-d);margin-left:8px;white-space:nowrap;font-weight:700">4/8 completos</span>
         </div>
       </div>
-      <div class="scroll-area">
-        <div class="section-label">Activas (2)</div>
 
-        <div class="card" onclick="showScreen('s3',null)">
-          <div class="card-header">
-            <div class="card-avatar" style="background:#e7f5ff;color:#1971c2">PA</div>
-            <div class="card-info">
-              <div class="card-order">OT-CENTRAL-2026-03-1036</div>
-              <div class="card-site">Sitio PA-CH-1036 · Chiriquí</div>
-              <div class="card-meta">Iniciada hoy 08:14 · 3/8 forms</div>
-            </div>
-            <span class="badge badge-open">Activa</span>
+      <!-- Orden casi completa -->
+      <div class="ocard" style="opacity:.65">
+        <div class="oc-head">
+          <div class="oc-av" style="background:#dcfce7;color:#166534;font-family:'Barlow Condensed',sans-serif">JP</div>
+          <div class="oc-info">
+            <div class="oc-order">OT-ESTE-2026-03-0780</div>
+            <div class="oc-site">Sitio HE-ES-0780</div>
+            <div class="oc-meta">Inspector J. Pérez · Herrera</div>
           </div>
-          <div class="card-footer">
-            <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:37%"></div></div>
-            <span style="font-size:11px;color:var(--gray-500);white-space:nowrap;margin-left:8px">3 / 8</span>
-          </div>
+          <span style="background:#f3f4f6;color:#6b7280;font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px">7/8</span>
         </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-avatar" style="background:#f3f0ff;color:#6741d9">VE</div>
-            <div class="card-info">
-              <div class="card-order">OT-NORTE-2026-03-2204</div>
-              <div class="card-site">Sitio VE-NR-2204 · Veraguas</div>
-              <div class="card-meta">Iniciada ayer 14:30 · 1/8 forms</div>
-            </div>
-            <span class="badge badge-open">Activa</span>
-          </div>
-          <div class="card-footer">
-            <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:12%"></div></div>
-            <span style="font-size:11px;color:var(--gray-500);white-space:nowrap;margin-left:8px">1 / 8</span>
-          </div>
-        </div>
-
-        <div class="section-label">Completadas (1)</div>
-        <div class="card" style="opacity:.7">
-          <div class="card-header">
-            <div class="card-avatar" style="background:#ebfbee;color:#2f9e44">CO</div>
-            <div class="card-info">
-              <div class="card-order">OT-CENTRAL-2026-03-0901</div>
-              <div class="card-site">Sitio CO-CE-0901 · Coclé</div>
-              <div class="card-meta">Completada 20/03/2026</div>
-            </div>
-            <span class="badge badge-done">Completa</span>
-          </div>
-        </div>
-      </div>
-      <!-- bottom nav vacío -->
-      <div style="height:var(--bottom-h);background:#fff;border-top:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;gap:24px">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
-          <svg width="20" height="20" fill="none" stroke="var(--navy)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span style="font-size:9px;font-weight:700;color:var(--navy)">Inicio</span>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          <span style="font-size:9px;color:var(--gray-500)">Buscar</span>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span style="font-size:9px;color:var(--gray-500)">Perfil</span>
+        <div class="oc-foot">
+          <div class="prog-wrap"><div class="prog-fill" style="width:87%;background:#9ca3af"></div></div>
         </div>
       </div>
     </div>
 
-    <!-- ════════════════════════════════
-         SCREEN 2: HOME — MI EQUIPO (NUEVO)
-    ════════════════════════════════ -->
-    <div class="screen" id="s2">
-      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" opacity=".3"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="10" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
-      <div class="app-header">
-        <div class="header-top">
-          <div style="flex:1">
-            <div style="color:rgba(255,255,255,.6);font-size:11px;margin-bottom:2px">Inspector · PTI</div>
-            <div style="color:#fff;font-size:18px;font-weight:800;letter-spacing:-.01em">PTI Inspect</div>
-          </div>
-          <div style="width:36px;height:36px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--navy)">CM</div>
+    <div style="height:72px;background:#fff;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;padding:0 20px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><svg width="20" height="20" fill="none" stroke="var(--navy)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span style="font-size:9px;font-weight:700;color:var(--navy)">Inicio</span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.35"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><span style="font-size:9px;color:var(--text-2)">Buscar</span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.35"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span style="font-size:9px;color:var(--text-2)">Perfil</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ S3: FORMS — INSPECTOR A (dueño) ═══ -->
+  <div class="screen" id="s3">
+    <div class="sbar"><span class="stime">9:41</span><div class="sicons"><svg width="15" height="11" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="24" height="11" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="16" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+    <div class="aheader">
+      <div class="ah-row">
+        <button class="back-btn" onclick="show('s1',null)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div style="flex:1">
+          <div class="ah-title">PA-CH-1036 · Chiriquí</div>
+          <div class="ah-sub">C. Martínez · tú eres el propietario</div>
+        </div>
+        <span class="otag">OT-03-1036</span>
+      </div>
+    </div>
+    <div class="scroll">
+      <!-- Progreso general -->
+      <div style="background:#fff;border-radius:12px;border:1px solid var(--border);padding:11px 13px;margin-bottom:10px;display:flex;align-items:center;gap:10px">
+        <div style="flex:1">
+          <div style="font-size:10px;font-weight:700;color:var(--text-2);letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px">Progreso total</div>
+          <div class="prog-wrap" style="height:6px"><div class="prog-fill" style="width:37%;background:var(--teal);height:6px"></div></div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--teal);line-height:1">3/8</div>
+          <div style="font-size:9px;color:var(--text-2);font-weight:600">FORMS</div>
         </div>
       </div>
-      <div class="tab-bar">
-        <div class="tab-item" onclick="showScreen('s1',null)">Mis Órdenes</div>
-        <div class="tab-item active">
-          Mi Equipo
-          <span class="tab-badge">3</span>
+
+      <!-- Form: Completado por mí -->
+      <div class="fcard done">
+        <div class="fc-body">
+          <div class="fc-icon">📋</div>
+          <div class="fc-info">
+            <div class="fc-name">Mantenimiento Preventivo</div>
+            <div class="fc-who"><div class="who-av">CM</div><span style="color:var(--gray)">Completado por ti · 08:52</span></div>
+          </div>
+          <span class="spill">✓ Listo</span>
         </div>
       </div>
-      <div class="scroll-area">
-        <!-- info banner -->
-        <div style="background:var(--blue-light);border-radius:10px;padding:10px 12px;margin-bottom:12px;display:flex;gap:8px;align-items:flex-start">
-          <span style="font-size:14px;flex-shrink:0">ℹ️</span>
-          <span style="font-size:11px;color:var(--blue);line-height:1.4">Estas son órdenes activas de tu equipo. Puedes unirte para colaborar en formularios disponibles.</span>
+
+      <!-- Form: En progreso por mí — modo escritura -->
+      <div class="fcard mine" onclick="show('s6',null)">
+        <div class="fc-body">
+          <div class="fc-icon">🔧</div>
+          <div class="fc-info">
+            <div class="fc-name">Mantenimiento Ejecutado</div>
+            <div class="fc-who"><div class="who-av">CM</div><span style="color:var(--teal-d);font-weight:600">Tuyo · En progreso</span></div>
+          </div>
+          <span class="spill">✏️ Editando</span>
         </div>
-
-        <div class="section-label">Órdenes activas del equipo (3)</div>
-
-        <!-- Orden con formularios disponibles -->
-        <div class="card" onclick="showScreen('s4',null)">
-          <div class="card-header">
-            <div class="card-avatar" style="background:#fff9db;color:#a16207">DA</div>
-            <div class="card-info">
-              <div class="card-order">OT-CENTRAL-2026-03-1044</div>
-              <div class="card-site">Sitio PA-CH-1044 · Chiriquí</div>
-              <div class="card-meta">Inspector: D. Alvarado</div>
-            </div>
-            <span class="badge badge-free">2 libres</span>
-          </div>
-          <div class="card-footer">
-            <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:25%"></div></div>
-            <span style="font-size:11px;color:var(--gray-500);white-space:nowrap;margin-left:8px">2 / 8</span>
-          </div>
+        <div class="fc-action">
+          <button class="btn-act btn-continue" onclick="show('s6',null)">→ Continuar editando</button>
         </div>
+      </div>
 
-        <!-- Orden con formulario en progreso -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-avatar" style="background:#f3f0ff;color:#6741d9">RL</div>
-            <div class="card-info">
-              <div class="card-order">OT-NORTE-2026-03-3110</div>
-              <div class="card-site">Sitio PAN-NR-3110 · Coclé</div>
-              <div class="card-meta">Inspector: R. López</div>
-            </div>
-            <span class="badge badge-readonly">En progreso</span>
+      <!-- Form: Libre -->
+      <div class="fcard free">
+        <div class="fc-body">
+          <div class="fc-icon">📦</div>
+          <div class="fc-info">
+            <div class="fc-name">Inventario de Equipos v2</div>
+            <div class="fc-who"><div class="who-av">?</div><span style="color:var(--green-d);font-weight:600">Sin asignar · disponible</span></div>
           </div>
-          <div class="card-footer">
-            <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:50%"></div></div>
-            <span style="font-size:11px;color:var(--gray-500);white-space:nowrap;margin-left:8px">4 / 8</span>
-          </div>
+          <span class="spill">Libre</span>
         </div>
+        <div class="fc-action">
+          <button class="btn-act btn-take">+ Tomar e iniciar</button>
+        </div>
+      </div>
 
-        <!-- Orden casi completa -->
-        <div class="card" style="opacity:.75">
-          <div class="card-header">
-            <div class="card-avatar" style="background:#ebfbee;color:#2f9e44">JP</div>
-            <div class="card-info">
-              <div class="card-order">OT-ESTE-2026-03-0780</div>
-              <div class="card-site">Sitio HE-ES-0780 · Herrera</div>
-              <div class="card-meta">Inspector: J. Pérez</div>
-            </div>
-            <span class="badge badge-done">7 / 8</span>
+      <!-- Form: Tomado por Inspector B — anotado -->
+      <div class="ann" data-n="NUEVO · tomado por colega">
+      <div class="fcard readonly" style="margin-bottom:0;border-color:transparent;border-radius:12px">
+        <div class="fc-body">
+          <div class="fc-icon" style="background:var(--amber-l)">🗼</div>
+          <div class="fc-info">
+            <div class="fc-name">Sistema de Ascenso</div>
+            <div class="fc-who"><div class="who-av">BR</div><span style="color:var(--amber-d);font-weight:600">B. Rodríguez lo tomó</span></div>
           </div>
-          <div class="card-footer">
-            <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:87%"></div></div>
-            <span style="font-size:11px;color:var(--gray-500);white-space:nowrap;margin-left:8px">7 / 8</span>
+          <span class="spill">👁 Ver</span>
+        </div>
+        <div class="fc-action">
+          <button class="btn-act btn-view" onclick="show('s5',null)">Ver en lectura</button>
+          <button class="btn-act btn-reassign" onclick="show('s7b',null)" style="max-width:130px">Reasignarme</button>
+        </div>
+      </div>
+      </div>
+
+      <!-- Forms libres restantes (compactos) -->
+      <div class="fcard free">
+        <div class="fc-body">
+          <div class="fc-icon">⚡</div>
+          <div class="fc-info">
+            <div class="fc-name">Prueba de Puesta a Tierra</div>
+            <div class="fc-who"><div class="who-av">?</div><span style="color:var(--green-d);font-weight:600">Sin asignar</span></div>
+          </div>
+          <span class="spill">Libre</span>
+        </div>
+        <div class="fc-action">
+          <button class="btn-act btn-take">+ Tomar e iniciar</button>
+        </div>
+      </div>
+
+      <div class="fcard free" style="opacity:.75">
+        <div class="fc-body">
+          <div class="fc-icon">📸</div>
+          <div class="fc-info">
+            <div class="fc-name">Reporte de Fotografías</div>
+            <div class="fc-who"><div class="who-av">?</div><span style="color:var(--green-d);font-weight:600">Sin asignar</span></div>
+          </div>
+          <span class="spill">Libre</span>
+        </div>
+      </div>
+    </div>
+    <div class="bnav">
+      <div style="flex:1;font-size:12px;color:var(--text-2)"><span style="font-weight:700;color:var(--text);font-size:13px">1 colega</span> trabajando en esta orden</div>
+      <button class="btn-cta teal" style="width:auto;padding:0 18px;font-size:13px">Ver progreso</button>
+    </div>
+  </div>
+
+  <!-- ═══ S4: FORMS — INSPECTOR B (colaborador) ═══ -->
+  <div class="screen" id="s4">
+    <div class="sbar"><span class="stime">9:41</span><div class="sicons"><svg width="15" height="11" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="24" height="11" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="12" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+    <div class="aheader">
+      <div class="ah-row">
+        <button class="back-btn" onclick="show('s2',null)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div style="flex:1">
+          <div class="ah-title">PA-CH-1044 · Chiriquí</div>
+          <div class="ah-sub">Propietario: D. Alvarado · colaborando</div>
+        </div>
+        <span class="otag">OT-03-1044</span>
+      </div>
+    </div>
+    <div class="scroll">
+
+      <div class="collab-banner">
+        <div class="cb-icon">🤝</div>
+        <div class="cb-body">
+          <div class="cb-t">MODO COLABORACIÓN</div>
+          <div class="cb-s">Toma formularios verdes para empezar a documentar</div>
+        </div>
+        <div style="background:var(--teal);color:var(--navy);font-size:10px;font-weight:800;padding:4px 9px;border-radius:8px;white-space:nowrap">2 disponibles</div>
+      </div>
+
+      <!-- Completado por dueño — gris -->
+      <div class="fcard done">
+        <div class="fc-body">
+          <div class="fc-icon">📋</div>
+          <div class="fc-info">
+            <div class="fc-name">Mantenimiento Preventivo</div>
+            <div class="fc-who"><div class="who-av" style="background:#d1d5db;color:#6b7280">DA</div><span style="color:var(--gray)">Completado por D. Alvarado</span></div>
+          </div>
+          <span class="spill">✓ Listo</span>
+        </div>
+      </div>
+
+      <!-- En progreso por A — B puede ver/reasignar -->
+      <div class="ann" data-n="LECTURA + reasignar">
+      <div class="fcard readonly" style="margin-bottom:0;border-color:transparent;border-radius:12px">
+        <div class="fc-body">
+          <div class="fc-icon" style="background:var(--amber-l)">🔧</div>
+          <div class="fc-info">
+            <div class="fc-name">Mantenimiento Ejecutado</div>
+            <div class="fc-who"><div class="who-av">DA</div><span style="color:var(--amber-d);font-weight:600">D. Alvarado · en progreso</span></div>
+          </div>
+          <span class="spill">🔒 Ocupado</span>
+        </div>
+        <div class="fc-action">
+          <button class="btn-act btn-view" onclick="show('s5',null)">👁 Ver en lectura</button>
+          <button class="btn-act btn-reassign" onclick="show('s7b',null)" style="max-width:130px">⚡ Reasignarme</button>
+        </div>
+      </div>
+      </div>
+
+      <!-- Libre — B puede tomar -->
+      <div class="ann" data-n="LIBRE — tomar directo">
+      <div class="fcard free" style="margin-bottom:0;border-color:transparent;border-radius:12px">
+        <div class="fc-body">
+          <div class="fc-icon">📦</div>
+          <div class="fc-info">
+            <div class="fc-name">Inventario de Equipos v2</div>
+            <div class="fc-who"><div class="who-av">?</div><span style="color:var(--green-d);font-weight:700">Disponible para ti</span></div>
+          </div>
+          <span class="spill">✅ Libre</span>
+        </div>
+        <div class="fc-action">
+          <button class="btn-act btn-take" onclick="show('s7a',null)">+ Tomar e iniciar ahora</button>
+        </div>
+      </div>
+      </div>
+
+      <!-- Otro libre -->
+      <div class="fcard free">
+        <div class="fc-body">
+          <div class="fc-icon">🗼</div>
+          <div class="fc-info">
+            <div class="fc-name">Sistema de Ascenso</div>
+            <div class="fc-who"><div class="who-av">?</div><span style="color:var(--green-d);font-weight:700">Disponible para ti</span></div>
+          </div>
+          <span class="spill">✅ Libre</span>
+        </div>
+        <div class="fc-action">
+          <button class="btn-act btn-take" onclick="show('s7a',null)">+ Tomar e iniciar ahora</button>
+        </div>
+      </div>
+
+      <div class="fcard free" style="opacity:.6">
+        <div class="fc-body">
+          <div class="fc-icon">⚡</div>
+          <div class="fc-info">
+            <div class="fc-name">Prueba de Puesta a Tierra</div>
+            <div class="fc-who"><div class="who-av">?</div><span style="color:var(--green-d);font-weight:600">Sin asignar</span></div>
+          </div>
+          <span class="spill">✅ Libre</span>
+        </div>
+      </div>
+    </div>
+    <div class="bnav">
+      <div style="flex:1;font-size:12px;color:var(--text-2)"><span style="font-weight:700;color:var(--green);font-size:13px">4 libres</span> para tomar</div>
+    </div>
+  </div>
+
+  <!-- ═══ S5: FORMULARIO — MODO LECTURA ═══ -->
+  <div class="screen" id="s5">
+    <div class="sbar"><span class="stime">9:43</span><div class="sicons"><svg width="15" height="11" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="24" height="11" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="8" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+    <div class="aheader">
+      <div class="ah-row">
+        <button class="back-btn" onclick="show('s4',null)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div style="flex:1"><div class="ah-title">Mantenimiento Ejecutado</div></div>
+        <span class="otag">OT-03-1044</span>
+      </div>
+    </div>
+    <div class="pills">
+      <div class="pill on">🔧 Paso 1</div>
+      <div class="pill">🔩 Paso 2</div>
+      <div class="pill">🏗 Paso 3</div>
+      <div class="pill">📸 Paso 4</div>
+    </div>
+    <div class="meta">
+      <div class="meta-i"><div class="meta-l">Inicio</div><div class="meta-v">24/03 · 08:22</div></div>
+      <div class="meta-i"><div class="meta-l">GPS</div><div class="meta-v">8.9824°, -79.52°</div></div>
+    </div>
+
+    <!-- ★ MODO BANNER — el cambio más impactante ★ -->
+    <div class="ann" data-n="NUEVO · banner de modo">
+    <div class="mode-banner reading" style="border-radius:0">
+      <div class="mb-icon">🔒</div>
+      <div style="flex:1">
+        <div class="mb-label">SOLO LECTURA</div>
+        <div class="mb-sub">Editando: D. Alvarado</div>
+      </div>
+      <button class="mb-action" onclick="show('s7b',null)">
+        ⚡ Reasignarme
+      </button>
+    </div>
+    </div>
+
+    <div class="scroll" style="padding-top:8px;background:#fffbeb">
+      <div class="fgroup">
+        <div class="fgtitle">Actividad Rawland</div>
+        <div class="frow">
+          <div class="flabel">Actividad ejecutada</div>
+          <input class="finput ro" value="Limpieza de antenas sector norte" readonly>
+        </div>
+        <div class="frow">
+          <div class="flabel">Estado</div>
+          <select class="fselect ro"><option>Ejecutado</option></select>
+        </div>
+        <div class="frow">
+          <div class="flabel">Observaciones</div>
+          <input class="finput ro" value="Sin novedad relevante" readonly>
+        </div>
+      </div>
+
+      <div class="fgroup">
+        <div class="fgtitle">Evidencia fotográfica</div>
+        <div class="photo-grid">
+          <div>
+            <div class="flabel" style="padding:0 0 4px">Foto Antes</div>
+            <div class="pslot has ro"><span style="font-size:10px;color:var(--text-2)">📷 foto_antes.jpg</span></div>
+          </div>
+          <div>
+            <div class="flabel" style="padding:0 0 4px">Foto Después</div>
+            <div class="pslot ro"><svg width="18" height="18" fill="none" stroke="#9ca3af" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="plab">Sin foto</span></div>
           </div>
         </div>
       </div>
-      <div style="height:var(--bottom-h);background:#fff;border-top:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;gap:24px">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
-          <svg width="20" height="20" fill="none" stroke="var(--navy)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span style="font-size:9px;font-weight:700;color:var(--navy)">Inicio</span>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><span style="font-size:9px;color:var(--gray-500)">Buscar</span></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span style="font-size:9px;color:var(--gray-500)">Perfil</span></div>
+
+      <div class="fgroup">
+        <div class="fgtitle">Checklist</div>
+        <div class="chk"><div class="cbox on ro"><svg width="11" height="11" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="clabel ro">Equipos de seguridad utilizados</span></div>
+        <div class="chk"><div class="cbox on ro"><svg width="11" height="11" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="clabel ro">Área despejada antes de iniciar</span></div>
+        <div class="chk"><div class="cbox ro"></div><span class="clabel ro">Reporte firmado por supervisor</span></div>
       </div>
     </div>
 
-    <!-- ════════════════════════════════
-         SCREEN 3: FORMULARIOS — INSPECTOR A (dueño)
-    ════════════════════════════════ -->
-    <div class="screen" id="s3">
-      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="16" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
-      <div class="app-header">
-        <div class="header-top">
-          <button class="header-back" onclick="showScreen('s1',null)">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <div style="flex:1">
-            <div class="header-title">PA-CH-1036 · Chiriquí</div>
-          </div>
-          <span class="order-badge">OT-CENTRAL-03-1036</span>
-        </div>
-        <div class="header-subtitle">Inspector C. Martínez · tú</div>
+    <div class="bnav">
+      <button class="btn-prev" onclick="show('s4',null)">← Volver</button>
+      <button class="btn-cta amber" onclick="show('s7b',null)">
+        ⚡ Quiero editar — Reasignarme
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══ S6: FORMULARIO — MODO ESCRITURA ═══ -->
+  <div class="screen" id="s6">
+    <div class="sbar"><span class="stime">9:41</span><div class="sicons"><svg width="15" height="11" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="24" height="11" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="16" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+    <div class="aheader">
+      <div class="ah-row">
+        <button class="back-btn" onclick="show('s3',null)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div style="flex:1"><div class="ah-title">Mantenimiento Ejecutado</div></div>
+        <span class="otag">OT-03-1036</span>
       </div>
-      <div class="scroll-area">
-        <div class="section-label">Progreso de formularios</div>
+    </div>
+    <div class="pills">
+      <div class="pill done">✓ Paso 1</div>
+      <div class="pill on">🔩 Paso 2</div>
+      <div class="pill">🏗 Paso 3</div>
+      <div class="pill">📸 Paso 4</div>
+    </div>
+    <div class="meta">
+      <div class="meta-i"><div class="meta-l">Inicio</div><div class="meta-v">24/03 · 09:10</div></div>
+      <div class="meta-i"><div class="meta-l">GPS</div><div class="meta-v">8.9824°, -79.52°</div></div>
+    </div>
 
-        <!-- Form 1: Completado por mí -->
-        <div class="form-row">
-          <div class="form-icon">📋</div>
-          <div class="form-info">
-            <div class="form-name">Mantenimiento Preventivo</div>
-            <div class="form-assignee"><span class="dot mine"></span>Completado por ti</div>
-          </div>
-          <div class="form-status-col">
-            <span class="badge badge-done">✓ Listo</span>
-          </div>
-        </div>
-
-        <!-- Form 2: En progreso por mí (escritura) -->
-        <div class="form-row" onclick="showScreen('s6',null)">
-          <div class="form-icon">🔧</div>
-          <div class="form-info">
-            <div class="form-name">Mantenimiento Ejecutado</div>
-            <div class="form-assignee"><span class="dot mine"></span>Asignado a ti · En progreso</div>
-          </div>
-          <div class="form-status-col">
-            <span class="badge badge-mine">✏️ Escritura</span>
-          </div>
-        </div>
-
-        <!-- Form 3: Libre -->
-        <div class="form-row">
-          <div class="form-icon">📦</div>
-          <div class="form-info">
-            <div class="form-name">Inventario de Equipos v2</div>
-            <div class="form-assignee"><span class="dot free"></span>Sin asignar · disponible</div>
-          </div>
-          <div class="form-status-col">
-            <span class="badge badge-free">Libre</span>
-          </div>
-        </div>
-
-        <!-- Form 4: Tomado por Inspector B -->
-        <div class="annotation" data-note="NUEVO — asignación visible">
-        <div class="form-row readonly" style="border:none;border-radius:0;margin-bottom:0">
-          <div class="form-icon" style="background:#f3f0ff">🗼</div>
-          <div class="form-info">
-            <div class="form-name">Sistema de Ascenso</div>
-            <div class="form-assignee"><span class="dot other"></span>Tomado por B. Rodríguez</div>
-          </div>
-          <div class="form-status-col">
-            <span class="badge badge-other">👁 Solo lectura</span>
-          </div>
-        </div>
-        </div>
-
-        <!-- Form 5: Libre -->
-        <div class="form-row">
-          <div class="form-icon">⚡</div>
-          <div class="form-info">
-            <div class="form-name">Prueba de Puesta a Tierra</div>
-            <div class="form-assignee"><span class="dot free"></span>Sin asignar · disponible</div>
-          </div>
-          <div class="form-status-col">
-            <span class="badge badge-free">Libre</span>
-          </div>
-        </div>
-
-        <!-- Form 6-8 condensados -->
-        <div class="form-row" style="opacity:.6">
-          <div class="form-icon" style="background:#f8f9fa">📸</div>
-          <div class="form-info">
-            <div class="form-name">Reporte Adicional de Fotografías</div>
-            <div class="form-assignee"><span class="dot free"></span>Sin asignar</div>
-          </div>
-          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
-        </div>
-        <div class="form-row" style="opacity:.6">
-          <div class="form-icon" style="background:#f8f9fa">🔍</div>
-          <div class="form-info">
-            <div class="form-name">Inspección General</div>
-            <div class="form-assignee"><span class="dot free"></span>Sin asignar</div>
-          </div>
-          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
-        </div>
-        <div class="form-row" style="opacity:.6">
-          <div class="form-icon" style="background:#f8f9fa">🗂</div>
-          <div class="form-info">
-            <div class="form-name">Inventario de Equipos v1</div>
-            <div class="form-assignee"><span class="dot free"></span>Sin asignar</div>
-          </div>
-          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
-        </div>
-
+    <!-- MODO BANNER — escritura (verde) -->
+    <div class="ann" data-n="NUEVO · banner de modo">
+    <div class="mode-banner writing" style="border-radius:0">
+      <div class="mb-icon">✏️</div>
+      <div style="flex:1">
+        <div class="mb-label">MODO ESCRITURA</div>
+        <div class="mb-sub">Asignado a ti · C. Martínez</div>
       </div>
-      <div style="height:var(--bottom-h);background:#fff;border-top:1px solid var(--gray-200);padding:8px 12px;display:flex;align-items:center">
-        <div style="flex:1;font-size:11px;color:var(--gray-500)">
-          <div style="font-weight:600;color:var(--gray-700);font-size:12px">3 / 8 formularios</div>
-          <div>1 tomado por equipo</div>
+      <div style="background:rgba(255,255,255,.25);border-radius:8px;padding:4px 10px;font-size:10px;font-weight:800;color:var(--navy)">● Guardando</div>
+    </div>
+    </div>
+
+    <div class="scroll" style="padding-top:8px">
+      <div class="fgroup">
+        <div class="fgtitle">Actividad Rawland</div>
+        <div class="frow">
+          <div class="flabel">Actividad ejecutada</div>
+          <input class="finput" placeholder="Describe la actividad realizada...">
         </div>
-        <button class="btn-next" style="width:auto;padding:0 20px" onclick="showScreen('s6',null)">Continuar →</button>
+        <div class="frow">
+          <div class="flabel">Estado</div>
+          <select class="fselect"><option value="">Seleccionar...</option><option>Ejecutado</option><option>Pendiente</option><option>No aplica</option></select>
+        </div>
+        <div class="frow">
+          <div class="flabel">Observaciones</div>
+          <input class="finput" placeholder="Observaciones adicionales...">
+        </div>
+      </div>
+
+      <div class="fgroup">
+        <div class="fgtitle">Evidencia fotográfica</div>
+        <div class="photo-grid">
+          <div>
+            <div class="flabel" style="padding:0 0 4px">Foto Antes</div>
+            <div class="pslot"><svg width="18" height="18" fill="none" stroke="#9ca3af" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="plab">📷 Cámara / Galería</span></div>
+          </div>
+          <div>
+            <div class="flabel" style="padding:0 0 4px">Foto Después</div>
+            <div class="pslot"><svg width="18" height="18" fill="none" stroke="#9ca3af" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="plab">📷 Cámara / Galería</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fgroup">
+        <div class="fgtitle">Checklist</div>
+        <div class="chk"><div class="cbox on"><svg width="11" height="11" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="clabel">Equipos de seguridad utilizados</span></div>
+        <div class="chk"><div class="cbox"></div><span class="clabel">Área despejada antes de iniciar</span></div>
+        <div class="chk"><div class="cbox"></div><span class="clabel">Reporte firmado por supervisor</span></div>
+      </div>
+    </div>
+    <div class="bnav">
+      <button class="btn-prev">← Anterior</button>
+      <button class="btn-cta navy">Siguiente paso →</button>
+    </div>
+  </div>
+
+  <!-- ═══ S7a: MODAL — TOMAR FORMULARIO LIBRE ═══ -->
+  <div class="screen" id="s7a">
+    <div style="position:absolute;inset:0;background:#f8fafc">
+      <div style="background:var(--navy);height:90px"></div>
+      <div style="padding:10px">
+        <div style="background:var(--green-l);border-radius:12px;height:68px;border:1.5px solid #bbf7d0;margin-bottom:8px"></div>
+        <div style="background:#fff;border-radius:12px;height:68px;border:1px solid var(--border)"></div>
+      </div>
+    </div>
+    <div class="mback">
+      <div class="msheet">
+        <div class="mhandle"></div>
+        <div class="mhead">
+          <div class="mhead-icon" style="background:var(--green-l)">📦</div>
+          <div>
+            <div class="mtitle">Tomar formulario</div>
+            <div class="msub">Inventario de Equipos v2 · OT-03-1044</div>
+          </div>
+        </div>
+        <div class="mdesc">Este formulario está <strong>libre</strong>. Al tomarlo quedará asignado a ti y podrás empezar a documentarlo de inmediato.</div>
+        <div class="minfo">
+          <div class="minfo-row"><span class="minfo-l">Estado</span><span style="background:var(--green-l);color:var(--green-d);font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px">✅ Sin asignar</span></div>
+          <div class="minfo-row"><span class="minfo-l">Se asignará a</span><span class="minfo-v" style="color:var(--teal-d)">B. Rodríguez · tú</span></div>
+          <div class="minfo-row"><span class="minfo-l">Datos previos</span><span class="minfo-v">Ninguno — formulario vacío</span></div>
+        </div>
+        <button class="mbtn-p green" onclick="show('s6',null)">✅ Confirmar — tomar formulario</button>
+        <button class="mbtn-s" onclick="show('s4',null)">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ S7b: MODAL — REASIGNARME (form ocupado) ═══ -->
+  <div class="screen" id="s7b">
+    <div style="position:absolute;inset:0;background:var(--amber-l)">
+      <div style="background:var(--navy);height:90px"></div>
+    </div>
+    <div class="mback">
+      <div class="msheet">
+        <div class="mhandle"></div>
+        <div class="mhead">
+          <div class="mhead-icon" style="background:var(--amber-l)">⚡</div>
+          <div>
+            <div class="mtitle">Reasignarme formulario</div>
+            <div class="msub">Mantenimiento Ejecutado · OT-03-1044</div>
+          </div>
+        </div>
+        <div class="mdesc">Este formulario está siendo editado por <strong>D. Alvarado</strong>. Al reasignarte, él pasará a modo solo-lectura y tú tendrás el control.</div>
+        <!-- Warning visual -->
+        <div style="background:var(--amber-l);border:1.5px solid #fde68a;border-radius:11px;padding:10px 13px;margin-bottom:14px;display:flex;gap:8px;align-items:flex-start">
+          <span style="font-size:16px;flex-shrink:0">⚠️</span>
+          <div style="font-size:11px;color:var(--amber-d);line-height:1.45;font-weight:500">Los cambios que D. Alvarado haya guardado se conservan. Tú continúas desde donde él lo dejó.</div>
+        </div>
+        <div class="minfo">
+          <div class="minfo-row"><span class="minfo-l">Actualmente asignado a</span><span style="background:var(--amber-l);color:var(--amber-d);font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px">D. Alvarado</span></div>
+          <div class="minfo-row"><span class="minfo-l">Se reasignará a</span><span class="minfo-v" style="color:var(--teal-d)">B. Rodríguez · tú</span></div>
+          <div class="minfo-row"><span class="minfo-l">Progreso guardado</span><span class="minfo-v">Sí — heredas sus datos</span></div>
+        </div>
+        <button class="mbtn-p amber" onclick="show('s6',null)">⚡ Confirmar — reasignarme</button>
+        <button class="mbtn-s" onclick="show('s5',null)">Cancelar — seguir viendo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ S8: TOAST — CONFLICTO OFFLINE ═══ -->
+  <div class="screen" id="s8">
+    <div class="sbar"><span class="stime">9:48</span><div class="sicons"><svg width="15" height="11" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="24" height="11" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="16" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+    <div class="aheader">
+      <div class="ah-row">
+        <button class="back-btn" onclick="show('s3',null)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div style="flex:1"><div class="ah-title">Mantenimiento Ejecutado</div></div>
+        <span class="otag">OT-03-1036</span>
       </div>
     </div>
 
-    <!-- ════════════════════════════════
-         SCREEN 4: FORMULARIOS — INSPECTOR B (unido)
-    ════════════════════════════════ -->
-    <div class="screen" id="s4">
-      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="12" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
-      <div class="app-header">
-        <div class="header-top">
-          <button class="header-back" onclick="showScreen('s2',null)">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <div style="flex:1">
-            <div class="header-title">PA-CH-1044 · Chiriquí</div>
-          </div>
-          <span class="order-badge">OT-CENTRAL-03-1044</span>
-        </div>
-        <div class="header-subtitle">Propietario: D. Alvarado · modo colaboración</div>
+    <!-- Toast -->
+    <div class="toast">
+      <div class="toast-icon">⚡</div>
+      <div class="toast-body">
+        <div class="toast-title">FORMULARIO REASIGNADO</div>
+        <div class="toast-desc">Mientras estabas offline, <strong>B. Rodríguez</strong> tomó este formulario. Tus cambios no se guardaron.</div>
       </div>
-      <div class="scroll-area">
-        <!-- Banner colaboración -->
-        <div style="background:var(--navy);border-radius:10px;padding:10px 12px;margin-bottom:12px;display:flex;gap:8px;align-items:center">
-          <span style="font-size:14px">🤝</span>
-          <div style="flex:1">
-            <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:1px">Modo colaboración</div>
-            <div style="font-size:10px;color:rgba(255,255,255,.6)">Puedes tomar formularios libres o ver los en progreso</div>
-          </div>
-        </div>
-
-        <div class="section-label">Formularios de la orden</div>
-
-        <!-- Form completado por A -->
-        <div class="form-row" style="opacity:.65;cursor:default">
-          <div class="form-icon">📋</div>
-          <div class="form-info">
-            <div class="form-name">Mantenimiento Preventivo</div>
-            <div class="form-assignee"><span class="dot other"></span>Completado por D. Alvarado</div>
-          </div>
-          <div class="form-status-col">
-            <span class="badge badge-done">✓ Listo</span>
-          </div>
-        </div>
-
-        <!-- Form en progreso por A — B puede ver en lectura -->
-        <div class="annotation" data-note="LECTURA + reasignar">
-        <div class="form-row readonly" onclick="showScreen('s5',null)" style="border:none;border-radius:0;margin-bottom:0">
-          <div class="form-icon" style="background:#fff9db">🔧</div>
-          <div class="form-info">
-            <div class="form-name">Mantenimiento Ejecutado</div>
-            <div class="form-assignee"><span class="dot other"></span>En progreso · D. Alvarado</div>
-          </div>
-          <div class="form-status-col">
-            <span class="badge badge-readonly">👁 Ver</span>
-          </div>
-        </div>
-        </div>
-
-        <!-- Form libre — B puede tomar -->
-        <div class="annotation" data-note="LIBRE — B puede tomar">
-        <div class="form-row" onclick="showScreen('s7',null)" style="border:none;border-radius:0;margin-bottom:0">
-          <div class="form-icon" style="background:var(--teal-light)">📦</div>
-          <div class="form-info">
-            <div class="form-name">Inventario de Equipos v2</div>
-            <div class="form-assignee"><span class="dot free"></span>Sin asignar · disponible</div>
-          </div>
-          <div class="form-status-col">
-            <span class="badge badge-free">➕ Tomar</span>
-          </div>
-        </div>
-        </div>
-
-        <!-- Resto de forms libres -->
-        <div class="form-row" onclick="showScreen('s7',null)">
-          <div class="form-icon">🗼</div>
-          <div class="form-info">
-            <div class="form-name">Sistema de Ascenso</div>
-            <div class="form-assignee"><span class="dot free"></span>Sin asignar · disponible</div>
-          </div>
-          <div class="form-status-col"><span class="badge badge-free">➕ Tomar</span></div>
-        </div>
-
-        <div class="form-row" style="opacity:.6;cursor:default">
-          <div class="form-icon" style="background:#f8f9fa">⚡</div>
-          <div class="form-info">
-            <div class="form-name">Prueba de Puesta a Tierra</div>
-            <div class="form-assignee"><span class="dot free"></span>Sin asignar</div>
-          </div>
-          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
-        </div>
-        <div class="form-row" style="opacity:.5;cursor:default">
-          <div class="form-icon" style="background:#f8f9fa">📸</div>
-          <div class="form-info"><div class="form-name">Reporte de Fotografías</div><div class="form-assignee"><span class="dot free"></span>Sin asignar</div></div>
-          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
-        </div>
-        <div class="form-row" style="opacity:.5;cursor:default">
-          <div class="form-icon" style="background:#f8f9fa">🔍</div>
-          <div class="form-info"><div class="form-name">Inspección General</div><div class="form-assignee"><span class="dot free"></span>Sin asignar</div></div>
-          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
-        </div>
-      </div>
-      <div style="height:var(--bottom-h);background:#fff;border-top:1px solid var(--gray-200);padding:8px 12px;display:flex;align-items:center;gap:8px">
-        <div style="flex:1;font-size:11px;color:var(--gray-500)">
-          <div style="font-weight:600;color:var(--gray-700);font-size:12px">1 / 8 completados</div>
-          <div>2 disponibles para tomar</div>
-        </div>
-        <button class="btn-next teal" style="width:auto;padding:0 16px" onclick="showScreen('s7',null)">+ Tomar formulario</button>
-      </div>
+      <span class="toast-x" onclick="this.parentElement.style.display='none'">✕</span>
     </div>
 
-    <!-- ════════════════════════════════
-         SCREEN 5: FORMULARIO — MODO LECTURA (Inspector B ve form de A)
-    ════════════════════════════════ -->
-    <div class="screen" id="s5">
-      <div class="status-bar"><span class="status-time">9:43</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="8" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
-      <div class="app-header">
-        <div class="header-top">
-          <button class="header-back" onclick="showScreen('s4',null)">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <div style="flex:1">
-            <div class="header-title">Mantenimiento Ejecutado</div>
-          </div>
-          <span class="order-badge">OT-03-1044</span>
-        </div>
-      </div>
-
-      <!-- STEP PILLS -->
-      <div class="step-pills">
-        <div class="step-pill active">🔧 Paso 1</div>
-        <div class="step-pill">🔩 Paso 2</div>
-        <div class="step-pill">🏗 Paso 3</div>
-        <div class="step-pill">📸 Paso 4</div>
-      </div>
-
-      <!-- META BAR -->
-      <div class="meta-bar">
-        <div class="meta-item">
-          <div style="display:flex;flex-direction:column">
-            <span class="meta-label">INICIO</span>
-            <span class="meta-value">24/03 · 08:22</span>
-          </div>
-        </div>
-        <div class="meta-item">
-          <div style="display:flex;flex-direction:column">
-            <span class="meta-label">GPS</span>
-            <span class="meta-value">8.9824°, -79.5199°</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ASSIGNEE BAR (NUEVO) -->
-      <div class="annotation" data-note="NUEVO — barra asignación">
-      <div class="assignee-bar reader" style="border-top:none">
-        <div class="assignee-icon reader">DA</div>
-        <div class="assignee-text reader">
-          <div class="at-label">ASIGNADO A</div>
-          <div class="at-name">D. Alvarado · en progreso</div>
-        </div>
-        <button class="btn-take" onclick="showScreen('s7',null)">
-          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-          Reasignarme
-        </button>
-      </div>
-      </div>
-
-      <div class="scroll-area" style="padding-top:8px">
-        <!-- READONLY NOTICE -->
-        <div class="readonly-notice">
-          <div class="rn-icon">🔒</div>
-          <div class="rn-text">Este formulario está en <strong>modo solo lectura</strong>. Puedes ver el progreso de D. Alvarado. Para editar, presiona "Reasignarme".</div>
-        </div>
-
-        <div class="field-group">
-          <div class="field-group-title">Actividad Rawland</div>
-          <div class="field-row">
-            <div class="field-label">Actividad ejecutada</div>
-            <input class="field-input disabled" value="Limpieza de antenas sector norte" readonly>
-          </div>
-          <div class="field-row">
-            <div class="field-label">Estado</div>
-            <select class="field-select disabled">
-              <option>Ejecutado</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <div class="field-label">Observaciones</div>
-            <input class="field-input disabled" value="Sin novedad relevante" readonly>
-          </div>
-        </div>
-
-        <div class="field-group">
-          <div class="field-group-title">Evidencia fotográfica</div>
-          <div class="field-row">
-            <div class="field-label">Foto Antes</div>
-            <div class="photo-slot has-photo disabled">
-              <span style="font-size:11px;color:var(--gray-500)">📷 ant_act01_240324.jpg</span>
-            </div>
-          </div>
-          <div class="field-row">
-            <div class="field-label">Foto Después</div>
-            <div class="photo-slot disabled">
-              <svg width="20" height="20" fill="none" stroke="var(--gray-400)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span class="photo-label">Sin foto</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="field-group">
-          <div class="field-group-title">Checklist de verificación</div>
-          <div class="check-item">
-            <div class="checkbox checked"><svg width="12" height="12" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <span class="check-label">Equipos de seguridad utilizados</span>
-          </div>
-          <div class="check-item">
-            <div class="checkbox checked"><svg width="12" height="12" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <span class="check-label">Área despejada antes de iniciar</span>
-          </div>
-          <div class="check-item">
-            <div class="checkbox disabled"></div>
-            <span class="check-label disabled">Reporte firmado por supervisor</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- BOTTOM NAV CON BOTÓN REASIGNARME (NUEVO) -->
-      <div class="bottom-nav">
-        <button class="btn-prev" onclick="showScreen('s4',null)">← Volver</button>
-        <button class="btn-next teal" onclick="showScreen('s7',null)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-          Reasignarme este formulario
-        </button>
-      </div>
+    <div class="pills">
+      <div class="pill done">✓ Paso 1</div>
+      <div class="pill on">🔩 Paso 2</div>
+      <div class="pill">🏗 Paso 3</div>
+      <div class="pill">📸 Paso 4</div>
+    </div>
+    <div class="meta">
+      <div class="meta-i"><div class="meta-l">Inicio</div><div class="meta-v">24/03 · 09:10</div></div>
+      <div class="meta-i"><div class="meta-l">GPS</div><div class="meta-v">8.9824°, -79.52°</div></div>
     </div>
 
-    <!-- ════════════════════════════════
-         SCREEN 6: FORMULARIO — MODO ESCRITURA (Inspector A)
-    ════════════════════════════════ -->
-    <div class="screen" id="s6">
-      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="16" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
-      <div class="app-header">
-        <div class="header-top">
-          <button class="header-back" onclick="showScreen('s3',null)">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <div style="flex:1">
-            <div class="header-title">Mantenimiento Ejecutado</div>
-          </div>
-          <span class="order-badge">OT-03-1036</span>
-        </div>
+    <!-- BANNER MODO — ahora en rojo/advertencia fuerte -->
+    <div class="mode-banner reading" style="background:#dc2626;border-radius:0">
+      <div class="mb-icon" style="background:rgba(255,255,255,.15)">📵</div>
+      <div style="flex:1">
+        <div class="mb-label">REASIGNADO — OFFLINE</div>
+        <div class="mb-sub">Ahora lo edita: B. Rodríguez</div>
       </div>
-
-      <div class="step-pills">
-        <div class="step-pill done">✓ Paso 1</div>
-        <div class="step-pill active">🔩 Paso 2</div>
-        <div class="step-pill">🏗 Paso 3</div>
-        <div class="step-pill">📸 Paso 4</div>
-      </div>
-
-      <div class="meta-bar">
-        <div class="meta-item"><div style="display:flex;flex-direction:column"><span class="meta-label">INICIO</span><span class="meta-value">24/03 · 09:10</span></div></div>
-        <div class="meta-item"><div style="display:flex;flex-direction:column"><span class="meta-label">GPS</span><span class="meta-value">8.9824°, -79.5199°</span></div></div>
-      </div>
-
-      <!-- ASSIGNEE BAR MODO ESCRITURA (NUEVO) -->
-      <div class="annotation" data-note="NUEVO — barra asignación">
-      <div class="assignee-bar writer" style="border-top:none">
-        <div class="assignee-icon writer">CM</div>
-        <div class="assignee-text writer">
-          <div class="at-label">ASIGNADO A</div>
-          <div class="at-name">C. Martínez · tú · modo escritura</div>
-        </div>
-        <span class="badge" style="background:var(--teal);color:var(--navy);font-size:10px">✏️ Activo</span>
-      </div>
-      </div>
-
-      <div class="scroll-area" style="padding-top:8px">
-        <div class="field-group">
-          <div class="field-group-title">Actividad Rawland</div>
-          <div class="field-row">
-            <div class="field-label">Actividad ejecutada</div>
-            <input class="field-input" placeholder="Describe la actividad..." value="">
-          </div>
-          <div class="field-row">
-            <div class="field-label">Estado</div>
-            <select class="field-select">
-              <option value="">Seleccionar estado</option>
-              <option>Ejecutado</option>
-              <option>Pendiente</option>
-              <option>No aplica</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <div class="field-label">Observaciones</div>
-            <input class="field-input" placeholder="Observaciones adicionales...">
-          </div>
-        </div>
-
-        <div class="field-group">
-          <div class="field-group-title">Evidencia fotográfica</div>
-          <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div>
-              <div class="field-label">Foto Antes</div>
-              <div class="photo-slot">
-                <svg width="20" height="20" fill="none" stroke="var(--gray-400)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span class="photo-label">📷 Antes</span>
-              </div>
-            </div>
-            <div>
-              <div class="field-label">Foto Después</div>
-              <div class="photo-slot">
-                <svg width="20" height="20" fill="none" stroke="var(--gray-400)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span class="photo-label">📷 Después</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="field-group">
-          <div class="field-group-title">Checklist</div>
-          <div class="check-item">
-            <div class="checkbox checked"><svg width="12" height="12" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <span class="check-label">Equipos de seguridad utilizados</span>
-          </div>
-          <div class="check-item">
-            <div class="checkbox"></div>
-            <span class="check-label">Área despejada antes de iniciar</span>
-          </div>
-          <div class="check-item">
-            <div class="checkbox"></div>
-            <span class="check-label">Reporte firmado por supervisor</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom-nav">
-        <button class="btn-prev">← Anterior</button>
-        <button class="btn-next">Siguiente →</button>
-      </div>
+      <button class="mb-action" style="background:#fff;color:#b91c1c" onclick="show('s7b',null)">
+        Recuperar
+      </button>
     </div>
 
-    <!-- ════════════════════════════════
-         SCREEN 7: MODAL — TOMAR/REASIGNAR FORMULARIO
-    ════════════════════════════════ -->
-    <div class="screen" id="s7">
-      <!-- Fondo difuminado: form lista de inspector B -->
-      <div style="position:absolute;inset:0;background:var(--gray-50);overflow:hidden;filter:blur(2px)">
-        <div style="background:var(--navy);height:100px"></div>
-        <div style="padding:12px">
-          <div style="background:#fff;height:56px;border-radius:12px;margin-bottom:8px;border:1px solid var(--gray-200)"></div>
-          <div style="background:#fff;height:56px;border-radius:12px;margin-bottom:8px;border:1px solid var(--gray-200)"></div>
-          <div style="background:#fff;height:56px;border-radius:12px;border:1px solid var(--gray-200)"></div>
-        </div>
+    <div class="scroll" style="background:#fff5f5;padding-top:8px">
+      <div style="background:var(--red-l);border:1.5px solid #fecaca;border-radius:12px;padding:11px 13px;margin-bottom:10px;display:flex;gap:8px">
+        <span style="font-size:16px;flex-shrink:0;margin-top:1px">📵</span>
+        <div style="font-size:11px;color:#991b1b;line-height:1.5;font-weight:500">Estabas <strong>sin conexión</strong> cuando B. Rodríguez tomó este formulario. Los datos que escribiste localmente no se sincronizaron. Presiona <strong>"Recuperar"</strong> si quieres retomar la edición.</div>
       </div>
-      <!-- MODAL SHEET -->
-      <div class="modal-backdrop">
-        <div class="modal-sheet">
-          <div class="modal-handle"></div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-            <div style="width:44px;height:44px;border-radius:12px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📋</div>
-            <div>
-              <div class="modal-title" style="margin-bottom:0">Tomar formulario</div>
-              <div style="font-size:12px;color:var(--gray-500)">Inventario de Equipos v2</div>
-            </div>
-          </div>
-          <div class="modal-desc">
-            Al tomar este formulario, se te asignará en modo escritura y podrás documentarlo. <strong>Esta acción es registrada y auditable.</strong>
-          </div>
-          <div class="modal-info">
-            <div class="modal-info-row">
-              <span class="modal-info-label">Orden</span>
-              <span class="modal-info-val" style="font-family:'JetBrains Mono',monospace;font-size:11px">OT-CENTRAL-2026-03-1044</span>
-            </div>
-            <div class="modal-info-row">
-              <span class="modal-info-label">Formulario</span>
-              <span class="modal-info-val">Inventario de Equipos v2</span>
-            </div>
-            <div class="modal-info-row">
-              <span class="modal-info-label">Estado actual</span>
-              <span class="badge badge-free" style="font-size:10px">Sin asignar</span>
-            </div>
-            <div class="modal-info-row">
-              <span class="modal-info-label">Asignado a</span>
-              <span class="modal-info-val" style="color:var(--teal-dark)">B. Rodríguez · tú</span>
-            </div>
-          </div>
-          <button class="modal-btn-primary teal" onclick="showScreen('s6_alt',null)">
-            ✅ Confirmar — Tomar formulario
-          </button>
-          <button class="modal-btn-secondary" onclick="showScreen('s4',null)">Cancelar</button>
+      <div class="fgroup">
+        <div class="fgtitle">Actividad Rawland</div>
+        <div class="frow">
+          <div class="flabel">Actividad ejecutada</div>
+          <input class="finput ro" value="" placeholder="— sin datos guardados —" readonly>
+        </div>
+        <div class="frow">
+          <div class="flabel">Estado</div>
+          <select class="fselect ro"><option>Sin seleccionar</option></select>
         </div>
       </div>
     </div>
 
-    <!-- ════════════════════════════════
-         SCREEN 8: TOAST — FORMULARIO REASIGNADO (offline)
-    ════════════════════════════════ -->
-    <div class="screen" id="s8">
-      <div class="status-bar"><span class="status-time">9:48</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="16" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
-      <div class="app-header">
-        <div class="header-top">
-          <button class="header-back" onclick="showScreen('s3',null)">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <div style="flex:1"><div class="header-title">Mantenimiento Ejecutado</div></div>
-          <span class="order-badge">OT-03-1036</span>
-        </div>
-      </div>
-
-      <div class="step-pills">
-        <div class="step-pill done">✓ Paso 1</div>
-        <div class="step-pill active">🔩 Paso 2</div>
-        <div class="step-pill">🏗 Paso 3</div>
-        <div class="step-pill">📸 Paso 4</div>
-      </div>
-
-      <!-- TOAST (aparece encima) -->
-      <div class="toast">
-        <div class="toast-icon">⚠️</div>
-        <div class="toast-body">
-          <div class="toast-title">Formulario reasignado</div>
-          <div class="toast-desc">Mientras estabas offline, <strong>B. Rodríguez</strong> tomó este formulario. Tus cambios locales no se guardaron. Ahora estás en modo lectura.</div>
-        </div>
-        <span class="toast-close" onclick="this.parentElement.style.display='none'">✕</span>
-      </div>
-
-      <div class="meta-bar">
-        <div class="meta-item"><div style="display:flex;flex-direction:column"><span class="meta-label">INICIO</span><span class="meta-value">24/03 · 09:10</span></div></div>
-        <div class="meta-item"><div style="display:flex;flex-direction:column"><span class="meta-label">GPS</span><span class="meta-value">8.9824°, -79.5199°</span></div></div>
-      </div>
-
-      <!-- ASSIGNEE BAR — ahora dice B. Rodríguez -->
-      <div class="assignee-bar reader">
-        <div class="assignee-icon reader">BR</div>
-        <div class="assignee-text reader">
-          <div class="at-label">ASIGNADO A</div>
-          <div class="at-name">B. Rodríguez · tomado mientras offline</div>
-        </div>
-        <button class="btn-take" onclick="showScreen('s7',null)">
-          Reasignarme
-        </button>
-      </div>
-
-      <div class="scroll-area" style="padding-top:8px">
-        <div class="readonly-notice">
-          <div class="rn-icon">📵</div>
-          <div class="rn-text"><strong>Estabas offline</strong> cuando B. Rodríguez tomó este formulario. Los cambios que hiciste localmente no se guardaron. Para continuar editando, presiona "Reasignarme".</div>
-        </div>
-
-        <div class="field-group">
-          <div class="field-group-title">Actividad Rawland</div>
-          <div class="field-row">
-            <div class="field-label">Actividad ejecutada</div>
-            <input class="field-input disabled" value="" placeholder="Sin datos guardados" readonly>
-          </div>
-          <div class="field-row">
-            <div class="field-label">Estado</div>
-            <select class="field-select disabled"><option>Sin seleccionar</option></select>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom-nav">
-        <button class="btn-prev" onclick="showScreen('s3',null)">← Volver</button>
-        <button class="btn-next teal" onclick="showScreen('s7',null)">
-          Reasignarme →
-        </button>
-      </div>
+    <div class="bnav">
+      <button class="btn-prev" onclick="show('s3',null)">← Volver</button>
+      <button class="btn-cta" style="background:#dc2626;color:#fff" onclick="show('s7b',null)">
+        ⚡ Recuperar formulario
+      </button>
     </div>
+  </div>
 
-  </div><!-- phone-screen -->
-</div><!-- phone-wrap -->
+  </div><!-- screen-wrap -->
+</div><!-- phone -->
 
-<div class="screen-desc" id="screen-desc">
-  <strong>Pantalla 1 — Home modificado:</strong> Tab "Mis Órdenes" existente + nuevo tab "Mi Equipo" con badge de órdenes activas del equipo. Cambio mínimo en la UI actual.
+<div class="sdesc" id="sdesc">
+  <strong>Pantalla 1 — Home / Mis Órdenes:</strong> Mismo flujo existente, se añade el tab "Mi Equipo" con badge numérico verde.
 </div>
 
 <script>
-const descs = {
-  s1: '<strong>Pantalla 1 — Home / Mis Órdenes (modificado):</strong> Se agrega el tab "Mi Equipo" con badge numérico y etiqueta "nuevo". El flujo existente de Mis Órdenes no cambia.',
-  s2: '<strong>Pantalla 2 — Home / Mi Equipo (NUEVO):</strong> Lista órdenes activas de la empresa con el inspector dueño, badge de formularios libres disponibles y banner informativo de modo colaboración.',
-  s3: '<strong>Pantalla 3 — Lista de formularios (Inspector A / dueño):</strong> Ahora cada form muestra quién lo tiene asignado. El form tomado por Inspector B aparece en modo solo-lectura para A.',
-  s4: '<strong>Pantalla 4 — Lista de formularios (Inspector B / colaborador):</strong> B ve todos los forms. Los libres muestran "➕ Tomar". Los en progreso muestran "👁 Ver" para entrar en lectura.',
-  s5: '<strong>Pantalla 5 — Formulario en modo lectura (Inspector B):</strong> Barra de asignación en amarillo con botón "Reasignarme", aviso de solo-lectura, todos los inputs deshabilitados. Botón en BottomNav también.',
-  s6: '<strong>Pantalla 6 — Formulario en modo escritura (Inspector A):</strong> Barra de asignación en verde/teal confirmando que el inspector actual tiene el control. Inputs editables normalmente.',
-  s7: '<strong>Pantalla 7 — Modal "Tomar formulario" (NUEVO):</strong> Bottom sheet con detalles del formulario, estado actual y confirmación atómica. Funciona igual para form libre o reasignación de form ocupado.',
-  s8: '<strong>Pantalla 8 — Toast de reasignación offline (NUEVO):</strong> Inspector A vuelve de offline y ve que perdió la asignación. Toast no bloqueante, barra en amarillo con el nuevo dueño y opción de "Reasignarme".'
+const d={
+  s1:'<strong>Pantalla 1 — Home / Mis Órdenes (mínimos cambios):</strong> Solo se agrega el tab "Mi Equipo" con badge verde y etiqueta NUEVO. El resto del flujo es idéntico.',
+  s2:'<strong>Pantalla 2 — Home / Mi Equipo (NUEVO):</strong> Las tarjetas de órdenes con formularios libres tienen una tira verde en el tope y chips con los formularios disponibles — sin leer texto ya sé que puedo actuar.',
+  s3:'<strong>Pantalla 3 — Lista de formularios (Inspector A / dueño):</strong> Cada tarjeta tiene borde lateral + fondo de color por estado. El form de B aparece con fondo ámbar y botones "Ver" y "Reasignarme" directamente visibles.',
+  s4:'<strong>Pantalla 4 — Lista de formularios (Inspector B / colaborador):</strong> Las tarjetas verdes gritan "puedo tomar esto". El botón "+ Tomar e iniciar ahora" está directo en la tarjeta, sin entrar al form.',
+  s5:'<strong>Pantalla 5 — Formulario modo lectura:</strong> El banner ámbar de pantalla completa dice "SOLO LECTURA" de forma inequívoca. Todos los campos deshabilitados tienen fondo gris. El botón "Reasignarme" está en el banner Y en el footer.',
+  s6:'<strong>Pantalla 6 — Formulario modo escritura:</strong> Banner verde teal en pantalla completa dice "MODO ESCRITURA" + nombre del inspector. Indicador "● Guardando" en tiempo real.',
+  s7a:'<strong>Pantalla 7a — Modal tomar formulario libre:</strong> Fondo verde, sin warnings. Solo confirmar. Muestra que no hay datos previos — formulario vacío.',
+  s7b:'<strong>Pantalla 7b — Modal reasignar formulario ocupado:</strong> Fondo ámbar, aviso de que el inspector anterior pasará a lectura pero sus datos se conservan. Acción diferenciada del caso libre.',
+  s8:'<strong>Pantalla 8 — Conflicto offline (NUEVO):</strong> Banner rojo con texto claro "REASIGNADO — OFFLINE". Toast oscuro no bloqueante en la parte superior. Aviso en rojo dentro del scroll. Botón "Recuperar formulario" prominente en rojo.'
 };
-
-function showScreen(id, btn) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  const el = document.getElementById(id);
-  if(el) el.classList.add('active');
-  document.querySelectorAll('.leg-btn').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  else {
-    const map = {s1:0,s2:1,s3:2,s4:3,s5:4,s6:5,s7:6,s8:7};
-    const idx = map[id];
-    if(idx !== undefined) {
-      const btns = document.querySelectorAll('.leg-btn');
-      if(btns[idx]) btns[idx].classList.add('active');
-    }
+function show(id,btn){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el)el.classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  if(btn){btn.classList.add('active')}else{
+    const m={s1:0,s2:1,s3:2,s4:3,s5:4,s6:5,s7a:6,s7b:7,s8:8};
+    const i=m[id];if(i!==undefined){const bs=document.querySelectorAll('.nb');if(bs[i])bs[i].classList.add('active')}
   }
-  const desc = document.getElementById('screen-desc');
-  if(desc && descs[id]) desc.innerHTML = descs[id];
+  const el2=document.getElementById('sdesc');
+  if(el2&&d[id])el2.innerHTML=d[id];
 }
 </script>
 </body>
