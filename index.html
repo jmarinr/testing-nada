@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PTI Inspect — Mockup Colaborativo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0F2A4A;
+  --navy-light:#1a3d6b;
+  --navy-dark:#091d33;
+  --teal:#00C8A0;
+  --teal-light:#e0faf4;
+  --teal-dark:#00a382;
+  --white:#ffffff;
+  --gray-50:#f8f9fa;
+  --gray-100:#f1f3f5;
+  --gray-200:#e9ecef;
+  --gray-300:#dee2e6;
+  --gray-400:#ced4da;
+  --gray-500:#adb5bd;
+  --gray-600:#868e96;
+  --gray-700:#495057;
+  --gray-800:#343a40;
+  --gray-900:#212529;
+  --red:#e03131;
+  --red-light:#fff5f5;
+  --amber:#f59f00;
+  --amber-light:#fff9db;
+  --green:#2f9e44;
+  --green-light:#ebfbee;
+  --blue:#1971c2;
+  --blue-light:#e7f5ff;
+  --purple:#6741d9;
+  --purple-light:#f3f0ff;
+  --screen-w:390px;
+  --screen-h:780px;
+  --header-h:64px;
+  --bottom-h:72px;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#0d1117;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:24px 16px 40px;
+  color:var(--gray-900);
+}
+
+/* ── NAV LEGEND ── */
+.legend{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+  max-width:900px;
+  margin-bottom:28px;
+}
+.legend-title{
+  width:100%;
+  text-align:center;
+  color:#8b949e;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+  font-weight:500;
+}
+.leg-btn{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:#161b22;
+  border:1px solid #30363d;
+  border-radius:20px;
+  padding:6px 14px;
+  color:#c9d1d9;
+  font-size:12px;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;
+  transition:all .15s;
+  white-space:nowrap;
+}
+.leg-btn:hover{background:#1f2937;border-color:#58a6ff}
+.leg-btn.active{background:#1f6feb22;border-color:#58a6ff;color:#58a6ff}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.leg-new{background:#00C8A0}
+.leg-changed{background:#f59f00}
+.leg-same{background:#484f58}
+
+/* ── PHONE FRAME ── */
+.phone-wrap{
+  position:relative;
+  width:var(--screen-w);
+  height:var(--screen-h);
+  background:#1c1c1e;
+  border-radius:48px;
+  padding:12px;
+  box-shadow:
+    0 0 0 1px #38383a,
+    0 0 0 3px #1c1c1e,
+    0 0 0 4px #38383a,
+    0 32px 80px rgba(0,0,0,.7),
+    inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.phone-notch{
+  position:absolute;
+  top:12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:120px;
+  height:34px;
+  background:#1c1c1e;
+  border-radius:0 0 20px 20px;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.notch-cam{width:12px;height:12px;border-radius:50%;background:#0a0a0a;border:1px solid #2c2c2e}
+.notch-speaker{width:48px;height:5px;border-radius:3px;background:#0a0a0a}
+.phone-screen{
+  width:100%;
+  height:100%;
+  border-radius:38px;
+  overflow:hidden;
+  background:var(--white);
+  position:relative;
+}
+
+/* ── SCREEN SYSTEM ── */
+.screen{
+  position:absolute;
+  inset:0;
+  display:none;
+  flex-direction:column;
+  background:var(--gray-50);
+  overflow:hidden;
+}
+.screen.active{display:flex}
+
+/* ── STATUS BAR ── */
+.status-bar{
+  height:44px;
+  background:var(--navy);
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  padding:0 20px 6px;
+  flex-shrink:0;
+  z-index:50;
+}
+.status-time{color:#fff;font-size:13px;font-weight:600;letter-spacing:.02em}
+.status-icons{display:flex;align-items:center;gap:5px}
+.status-icons svg{fill:white}
+
+/* ── APP HEADER ── */
+.app-header{
+  background:var(--navy);
+  padding:12px 16px 14px;
+  flex-shrink:0;
+  z-index:40;
+}
+.header-top{display:flex;align-items:center;gap:10px;margin-bottom:2px}
+.header-back{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,.1);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;flex-shrink:0;
+  transition:background .15s;
+}
+.header-back:hover{background:rgba(255,255,255,.18)}
+.header-title{color:#fff;font-size:16px;font-weight:700;flex:1;line-height:1.2}
+.header-subtitle{color:rgba(255,255,255,.6);font-size:12px;line-height:1.3;padding-left:42px}
+.order-badge{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
+  color:#fff;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  padding:3px 8px;
+  border-radius:6px;
+  white-space:nowrap;
+}
+
+/* ── TABS ── */
+.tab-bar{
+  display:flex;
+  background:var(--navy-dark);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  flex-shrink:0;
+}
+.tab-item{
+  flex:1;
+  padding:10px 4px;
+  color:rgba(255,255,255,.45);
+  font-size:12px;
+  font-weight:500;
+  text-align:center;
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all .15s;
+  position:relative;
+}
+.tab-item.active{
+  color:#fff;
+  border-bottom-color:var(--teal);
+}
+.tab-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:16px;height:16px;
+  background:var(--teal);
+  color:var(--navy);
+  border-radius:50%;
+  font-size:9px;
+  font-weight:700;
+  margin-left:4px;
+  vertical-align:middle;
+}
+.tab-new-badge{
+  position:absolute;
+  top:6px;right:18px;
+  width:6px;height:6px;
+  background:var(--teal);
+  border-radius:50%;
+}
+
+/* ── SCROLL AREA ── */
+.scroll-area{
+  flex:1;
+  overflow-y:auto;
+  padding:12px;
+  scroll-behavior:smooth;
+}
+.scroll-area::-webkit-scrollbar{width:0}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{
+  height:var(--bottom-h);
+  background:#fff;
+  border-top:1px solid var(--gray-200);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  flex-shrink:0;
+}
+.btn-prev,.btn-next{
+  height:44px;
+  border-radius:10px;
+  border:none;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:all .15s;
+}
+.btn-prev{
+  background:var(--gray-100);
+  color:var(--gray-700);
+  width:80px;flex-shrink:0;
+}
+.btn-next{
+  background:var(--navy);
+  color:#fff;
+  flex:1;
+}
+.btn-next:hover{background:var(--navy-light)}
+.btn-next.teal{background:var(--teal);color:var(--navy)}
+.btn-next.red{background:#c92a2a;color:#fff}
+
+/* ── CARDS ── */
+.card{
+  background:#fff;
+  border-radius:14px;
+  border:1px solid var(--gray-200);
+  margin-bottom:10px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:all .15s;
+}
+.card:hover{border-color:var(--navy);transform:translateY(-1px);box-shadow:0 4px 12px rgba(15,42,74,.1)}
+.card-header{
+  padding:12px 14px 10px;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+}
+.card-avatar{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;flex-shrink:0;
+}
+.card-info{flex:1;min-width:0}
+.card-order{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--gray-600);margin-bottom:2px}
+.card-site{font-size:14px;font-weight:600;color:var(--gray-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-meta{font-size:11px;color:var(--gray-500);margin-top:2px}
+.card-footer{
+  padding:8px 14px 10px;
+  border-top:1px solid var(--gray-100);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;
+}
+
+/* ── BADGES / PILLS ── */
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 8px;border-radius:20px;
+  font-size:10px;font-weight:600;letter-spacing:.02em;
+  white-space:nowrap;flex-shrink:0;
+}
+.badge-open{background:var(--blue-light);color:var(--blue)}
+.badge-mine{background:var(--teal-light);color:#007a63}
+.badge-other{background:var(--purple-light);color:var(--purple)}
+.badge-free{background:var(--green-light);color:var(--green)}
+.badge-done{background:var(--gray-100);color:var(--gray-600)}
+.badge-readonly{background:var(--amber-light);color:#a16207}
+
+/* ── FORM ROWS (lista formularios) ── */
+.form-row{
+  background:#fff;
+  border-radius:12px;
+  border:1px solid var(--gray-200);
+  margin-bottom:8px;
+  padding:12px 14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  transition:all .15s;
+}
+.form-row:hover{border-color:var(--navy-light)}
+.form-row.readonly{background:var(--gray-50)}
+.form-icon{
+  width:38px;height:38px;border-radius:10px;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  font-size:16px;
+}
+.form-info{flex:1;min-width:0}
+.form-name{font-size:13px;font-weight:600;color:var(--gray-900);margin-bottom:3px}
+.form-assignee{font-size:11px;color:var(--gray-500);display:flex;align-items:center;gap:4px}
+.form-assignee .dot{width:6px;height:6px;border-radius:50%;background:var(--gray-400);flex-shrink:0}
+.form-assignee .dot.mine{background:var(--teal)}
+.form-assignee .dot.other{background:var(--purple)}
+.form-assignee .dot.free{background:var(--green)}
+.form-status-col{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+
+/* ── STEP PILLS ── */
+.step-pills{
+  display:flex;gap:6px;overflow-x:auto;padding:10px 14px;
+  background:var(--navy);
+  flex-shrink:0;
+}
+.step-pills::-webkit-scrollbar{height:0}
+.step-pill{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.1);
+  border-radius:20px;
+  padding:5px 10px;
+  white-space:nowrap;
+  font-size:11px;color:rgba(255,255,255,.6);
+  cursor:pointer;flex-shrink:0;
+}
+.step-pill.active{background:#fff;color:var(--navy);font-weight:600}
+.step-pill.done{background:rgba(0,200,160,.2);color:var(--teal)}
+
+/* ── META BAR ── */
+.meta-bar{
+  background:rgba(15,42,74,.04);
+  border-bottom:1px solid var(--gray-200);
+  padding:8px 14px;
+  display:flex;gap:16px;flex-shrink:0;
+}
+.meta-item{display:flex;align-items:center;gap:5px}
+.meta-label{font-size:10px;color:var(--gray-500);font-weight:500;letter-spacing:.03em}
+.meta-value{font-size:11px;color:var(--gray-800);font-weight:600}
+
+/* ── ASSIGNEE BAR (nuevo) ── */
+.assignee-bar{
+  padding:9px 14px;
+  display:flex;align-items:center;gap:8px;
+  flex-shrink:0;
+}
+.assignee-bar.writer{
+  background:#e0faf4;
+  border-bottom:1px solid #b8f2e6;
+}
+.assignee-bar.reader{
+  background:#fff9db;
+  border-bottom:1px solid #ffe066;
+}
+.assignee-icon{
+  width:28px;height:28px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;flex-shrink:0;
+}
+.assignee-icon.writer{background:var(--teal);color:var(--navy)}
+.assignee-icon.reader{background:#ffe066;color:#7a5d00}
+.assignee-text{flex:1}
+.assignee-text .at-label{font-size:10px;color:var(--gray-500);font-weight:500}
+.assignee-text .at-name{font-size:12px;font-weight:600}
+.assignee-text.writer .at-name{color:#007a63}
+.assignee-text.reader .at-name{color:#7a5d00}
+.btn-take{
+  background:var(--navy);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:7px 12px;
+  font-size:11px;font-weight:600;
+  cursor:pointer;
+  white-space:nowrap;
+  display:flex;align-items:center;gap:4px;
+  transition:background .15s;
+}
+.btn-take:hover{background:var(--navy-light)}
+
+/* ── FORM FIELDS ── */
+.field-group{background:#fff;border-radius:12px;border:1px solid var(--gray-200);margin-bottom:10px;overflow:hidden}
+.field-group-title{padding:10px 14px 8px;font-size:11px;font-weight:700;color:var(--gray-600);letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid var(--gray-100);background:var(--gray-50)}
+.field-row{padding:10px 14px;border-bottom:1px solid var(--gray-100)}
+.field-row:last-child{border-bottom:none}
+.field-label{font-size:11px;font-weight:600;color:var(--gray-600);margin-bottom:5px}
+.field-input{
+  width:100%;
+  height:36px;
+  border:1px solid var(--gray-300);
+  border-radius:8px;
+  padding:0 10px;
+  font-size:13px;
+  font-family:'Inter',sans-serif;
+  color:var(--gray-900);
+  background:#fff;
+  outline:none;
+  transition:border .15s;
+}
+.field-input:focus{border-color:var(--navy)}
+.field-input.disabled{
+  background:var(--gray-100);
+  color:var(--gray-500);
+  cursor:not-allowed;
+  border-color:var(--gray-200);
+}
+.field-select{
+  width:100%;height:36px;
+  border:1px solid var(--gray-300);
+  border-radius:8px;
+  padding:0 10px;
+  font-size:13px;
+  font-family:'Inter',sans-serif;
+  color:var(--gray-900);
+  background:#fff;
+  outline:none;
+  -webkit-appearance:none;
+}
+.field-select.disabled{
+  background:var(--gray-100);
+  color:var(--gray-500);
+  pointer-events:none;
+  border-color:var(--gray-200);
+}
+
+/* ── CHECKLIST ITEM ── */
+.check-item{
+  padding:10px 14px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid var(--gray-100);
+}
+.check-item:last-child{border-bottom:none}
+.checkbox{
+  width:20px;height:20px;border-radius:6px;
+  border:2px solid var(--gray-300);
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.checkbox.checked{background:var(--navy);border-color:var(--navy)}
+.checkbox.disabled{background:var(--gray-100);border-color:var(--gray-200)}
+.check-label{font-size:12px;color:var(--gray-800);flex:1}
+.check-label.disabled{color:var(--gray-400)}
+
+/* ── READONLY OVERLAY ── */
+.readonly-notice{
+  background:var(--amber-light);
+  border:1px solid #ffe066;
+  border-radius:10px;
+  padding:10px 12px;
+  margin-bottom:10px;
+  display:flex;align-items:flex-start;gap:8px;
+}
+.readonly-notice .rn-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.readonly-notice .rn-text{font-size:11px;color:#7a5d00;line-height:1.4}
+.readonly-notice .rn-text strong{font-weight:700}
+
+/* ── TOAST NOTIFICATION ── */
+.toast{
+  position:absolute;
+  top:54px;left:12px;right:12px;
+  background:var(--navy);
+  color:#fff;
+  border-radius:12px;
+  padding:12px 14px;
+  display:flex;align-items:flex-start;gap:10px;
+  z-index:200;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);
+  animation:slideDown .3s ease;
+}
+@keyframes slideDown{from{transform:translateY(-12px);opacity:0}to{transform:translateY(0);opacity:1}}
+.toast-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:16px;
+}
+.toast-body{flex:1}
+.toast-title{font-size:13px;font-weight:700;margin-bottom:2px}
+.toast-desc{font-size:11px;color:rgba(255,255,255,.7);line-height:1.4}
+.toast-close{color:rgba(255,255,255,.5);cursor:pointer;font-size:16px;align-self:flex-start;flex-shrink:0}
+
+/* ── MODAL ── */
+.modal-backdrop{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.5);
+  z-index:150;
+  display:flex;align-items:flex-end;
+}
+.modal-sheet{
+  background:#fff;
+  border-radius:20px 20px 0 0;
+  width:100%;
+  padding:20px 20px 32px;
+}
+.modal-handle{width:36px;height:4px;background:var(--gray-300);border-radius:2px;margin:0 auto 18px}
+.modal-title{font-size:17px;font-weight:700;color:var(--gray-900);margin-bottom:6px}
+.modal-desc{font-size:13px;color:var(--gray-600);line-height:1.5;margin-bottom:20px}
+.modal-info{
+  background:var(--gray-50);border-radius:10px;
+  padding:12px 14px;margin-bottom:20px;
+}
+.modal-info-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.modal-info-row:last-child{margin-bottom:0}
+.modal-info-label{font-size:11px;color:var(--gray-500);font-weight:500}
+.modal-info-val{font-size:12px;color:var(--gray-800);font-weight:600}
+.modal-btn-primary{
+  width:100%;height:46px;
+  background:var(--navy);color:#fff;
+  border:none;border-radius:12px;
+  font-size:14px;font-weight:600;
+  cursor:pointer;margin-bottom:8px;
+  transition:background .15s;
+}
+.modal-btn-primary:hover{background:var(--navy-light)}
+.modal-btn-primary.teal{background:var(--teal);color:var(--navy)}
+.modal-btn-secondary{
+  width:100%;height:40px;
+  background:transparent;color:var(--gray-600);
+  border:1px solid var(--gray-300);border-radius:12px;
+  font-size:13px;font-weight:500;cursor:pointer;
+}
+
+/* ── SECTION LABEL ── */
+.section-label{
+  font-size:10px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--gray-500);
+  margin:14px 2px 6px;
+}
+
+/* ── INSPECTOR AVATAR ── */
+.inspector-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--navy);
+  border-radius:20px;
+  padding:3px 8px 3px 4px;
+}
+.inspector-chip .ic-av{
+  width:18px;height:18px;border-radius:50%;
+  background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;font-weight:800;color:var(--navy);
+}
+.inspector-chip .ic-name{font-size:10px;color:#fff;font-weight:600}
+
+/* ── PROGRESS BAR ── */
+.prog-bar-wrap{height:3px;background:var(--gray-200);border-radius:2px;flex:1}
+.prog-bar-fill{height:100%;border-radius:2px;background:var(--teal);transition:width .3s}
+
+/* ── EMPTY STATE ── */
+.empty-state{
+  display:flex;flex-direction:column;align-items:center;
+  padding:40px 20px;text-align:center;
+}
+.empty-icon{font-size:40px;margin-bottom:12px;opacity:.4}
+.empty-title{font-size:15px;font-weight:600;color:var(--gray-700);margin-bottom:4px}
+.empty-desc{font-size:13px;color:var(--gray-500)}
+
+/* ── PHOTO SLOT ── */
+.photo-slot{
+  background:var(--gray-100);
+  border:2px dashed var(--gray-300);
+  border-radius:10px;
+  height:80px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:4px;
+  cursor:pointer;
+  transition:all .15s;
+}
+.photo-slot:hover{border-color:var(--navy);background:var(--blue-light)}
+.photo-slot.disabled{cursor:not-allowed;opacity:.5}
+.photo-slot.has-photo{
+  background:var(--gray-200);
+  border-style:solid;
+  border-color:var(--gray-300);
+  position:relative;overflow:hidden;
+}
+.photo-label{font-size:10px;color:var(--gray-500);font-weight:500}
+
+/* ── NEW BADGE ── */
+.feature-tag{
+  display:inline-flex;align-items:center;gap:3px;
+  background:var(--teal);color:var(--navy);
+  font-size:9px;font-weight:800;
+  padding:2px 6px;border-radius:4px;
+  text-transform:uppercase;letter-spacing:.04em;
+  vertical-align:middle;margin-left:6px;
+}
+
+/* ── ANNOTATION ── */
+.annotation{
+  position:relative;
+  border:2px dashed #00C8A0;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+.annotation::before{
+  content:attr(data-note);
+  position:absolute;
+  top:-10px;left:10px;
+  background:#00C8A0;
+  color:var(--navy);
+  font-size:9px;font-weight:800;
+  padding:1px 7px;border-radius:4px;
+  text-transform:uppercase;letter-spacing:.05em;
+  white-space:nowrap;
+}
+
+/* ── SCREEN LABEL (outside phone) ── */
+.screen-desc{
+  color:#8b949e;
+  font-size:12px;
+  text-align:center;
+  margin-top:16px;
+  max-width:390px;
+  line-height:1.5;
+}
+.screen-desc strong{color:#c9d1d9}
+
+</style>
+</head>
+<body>
+
+<!-- NAV LEGEND -->
+<div class="legend">
+  <div class="legend-title">Selecciona una pantalla para navegar</div>
+  <button class="leg-btn active" onclick="showScreen('s1',this)">
+    <span class="leg-dot leg-changed"></span>1. Home — Mis Órdenes
+  </button>
+  <button class="leg-btn" onclick="showScreen('s2',this)">
+    <span class="leg-dot leg-new"></span>2. Home — Mi Equipo
+  </button>
+  <button class="leg-btn" onclick="showScreen('s3',this)">
+    <span class="leg-dot leg-changed"></span>3. Formularios (Inspector A)
+  </button>
+  <button class="leg-btn" onclick="showScreen('s4',this)">
+    <span class="leg-dot leg-new"></span>4. Formularios (Inspector B)
+  </button>
+  <button class="leg-btn" onclick="showScreen('s5',this)">
+    <span class="leg-dot leg-new"></span>5. Formulario — Modo Lectura
+  </button>
+  <button class="leg-btn" onclick="showScreen('s6',this)">
+    <span class="leg-dot leg-same"></span>6. Formulario — Modo Escritura
+  </button>
+  <button class="leg-btn" onclick="showScreen('s7',this)">
+    <span class="leg-dot leg-new"></span>7. Modal — Tomar Formulario
+  </button>
+  <button class="leg-btn" onclick="showScreen('s8',this)">
+    <span class="leg-dot leg-new"></span>8. Toast — Reasignado offline
+  </button>
+</div>
+
+<!-- PHONE -->
+<div class="phone-wrap">
+  <div class="phone-notch">
+    <div class="notch-cam"></div>
+    <div class="notch-speaker"></div>
+  </div>
+  <div class="phone-screen">
+
+    <!-- ════════════════════════════════
+         SCREEN 1: HOME — MIS ÓRDENES (cambios mínimos)
+    ════════════════════════════════ -->
+    <div class="screen active" id="s1">
+      <div class="status-bar">
+        <span class="status-time">9:41</span>
+        <div class="status-icons">
+          <svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" opacity=".3"/></svg>
+          <svg width="14" height="12" viewBox="0 0 14 12"><path d="M7 3C4.5 3 2.3 4.1 1 5.8L0 4.6C1.6 2.5 4.2 1 7 1s5.4 1.5 7 3.6L13 5.8C11.7 4.1 9.5 3 7 3z" opacity=".5"/><path d="M7 5.5c-1.5 0-2.8.7-3.7 1.7L2.3 6.1C3.5 4.8 5.1 4 7 4s3.5.8 4.7 2.1l-1 1.1C9.8 6.2 8.5 5.5 7 5.5z" opacity=".7"/><path d="M7 8c-.9 0-1.7.4-2.2 1L3.7 7.8C4.5 6.9 5.7 6.5 7 6.5s2.5.4 3.3 1.3L9.2 9C8.7 8.4 7.9 8 7 8z"/><circle cx="7" cy="11" r="1.5"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="14" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg>
+        </div>
+      </div>
+      <div class="app-header">
+        <div class="header-top">
+          <div style="flex:1">
+            <div style="color:rgba(255,255,255,.6);font-size:11px;margin-bottom:2px">Inspector · PTI</div>
+            <div style="color:#fff;font-size:18px;font-weight:800;letter-spacing:-.01em">PTI Inspect</div>
+          </div>
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--navy)">CM</div>
+        </div>
+      </div>
+      <!-- TABS (modificado) -->
+      <div class="tab-bar">
+        <div class="tab-item active">Mis Órdenes</div>
+        <div class="tab-item" onclick="showScreen('s2',null)">
+          Mi Equipo
+          <span class="tab-badge">3</span>
+          <span class="feature-tag">nuevo</span>
+        </div>
+      </div>
+      <div class="scroll-area">
+        <div class="section-label">Activas (2)</div>
+
+        <div class="card" onclick="showScreen('s3',null)">
+          <div class="card-header">
+            <div class="card-avatar" style="background:#e7f5ff;color:#1971c2">PA</div>
+            <div class="card-info">
+              <div class="card-order">OT-CENTRAL-2026-03-1036</div>
+              <div class="card-site">Sitio PA-CH-1036 · Chiriquí</div>
+              <div class="card-meta">Iniciada hoy 08:14 · 3/8 forms</div>
+            </div>
+            <span class="badge badge-open">Activa</span>
+          </div>
+          <div class="card-footer">
+            <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:37%"></div></div>
+            <span style="font-size:11px;color:var(--gray-500);white-space:nowrap;margin-left:8px">3 / 8</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-avatar" style="background:#f3f0ff;color:#6741d9">VE</div>
+            <div class="card-info">
+              <div class="card-order">OT-NORTE-2026-03-2204</div>
+              <div class="card-site">Sitio VE-NR-2204 · Veraguas</div>
+              <div class="card-meta">Iniciada ayer 14:30 · 1/8 forms</div>
+            </div>
+            <span class="badge badge-open">Activa</span>
+          </div>
+          <div class="card-footer">
+            <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:12%"></div></div>
+            <span style="font-size:11px;color:var(--gray-500);white-space:nowrap;margin-left:8px">1 / 8</span>
+          </div>
+        </div>
+
+        <div class="section-label">Completadas (1)</div>
+        <div class="card" style="opacity:.7">
+          <div class="card-header">
+            <div class="card-avatar" style="background:#ebfbee;color:#2f9e44">CO</div>
+            <div class="card-info">
+              <div class="card-order">OT-CENTRAL-2026-03-0901</div>
+              <div class="card-site">Sitio CO-CE-0901 · Coclé</div>
+              <div class="card-meta">Completada 20/03/2026</div>
+            </div>
+            <span class="badge badge-done">Completa</span>
+          </div>
+        </div>
+      </div>
+      <!-- bottom nav vacío -->
+      <div style="height:var(--bottom-h);background:#fff;border-top:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;gap:24px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+          <svg width="20" height="20" fill="none" stroke="var(--navy)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span style="font-size:9px;font-weight:700;color:var(--navy)">Inicio</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <span style="font-size:9px;color:var(--gray-500)">Buscar</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span style="font-size:9px;color:var(--gray-500)">Perfil</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         SCREEN 2: HOME — MI EQUIPO (NUEVO)
+    ════════════════════════════════ -->
+    <div class="screen" id="s2">
+      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" opacity=".3"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="10" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+      <div class="app-header">
+        <div class="header-top">
+          <div style="flex:1">
+            <div style="color:rgba(255,255,255,.6);font-size:11px;margin-bottom:2px">Inspector · PTI</div>
+            <div style="color:#fff;font-size:18px;font-weight:800;letter-spacing:-.01em">PTI Inspect</div>
+          </div>
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--navy)">CM</div>
+        </div>
+      </div>
+      <div class="tab-bar">
+        <div class="tab-item" onclick="showScreen('s1',null)">Mis Órdenes</div>
+        <div class="tab-item active">
+          Mi Equipo
+          <span class="tab-badge">3</span>
+        </div>
+      </div>
+      <div class="scroll-area">
+        <!-- info banner -->
+        <div style="background:var(--blue-light);border-radius:10px;padding:10px 12px;margin-bottom:12px;display:flex;gap:8px;align-items:flex-start">
+          <span style="font-size:14px;flex-shrink:0">ℹ️</span>
+          <span style="font-size:11px;color:var(--blue);line-height:1.4">Estas son órdenes activas de tu equipo. Puedes unirte para colaborar en formularios disponibles.</span>
+        </div>
+
+        <div class="section-label">Órdenes activas del equipo (3)</div>
+
+        <!-- Orden con formularios disponibles -->
+        <div class="card" onclick="showScreen('s4',null)">
+          <div class="card-header">
+            <div class="card-avatar" style="background:#fff9db;color:#a16207">DA</div>
+            <div class="card-info">
+              <div class="card-order">OT-CENTRAL-2026-03-1044</div>
+              <div class="card-site">Sitio PA-CH-1044 · Chiriquí</div>
+              <div class="card-meta">Inspector: D. Alvarado</div>
+            </div>
+            <span class="badge badge-free">2 libres</span>
+          </div>
+          <div class="card-footer">
+            <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:25%"></div></div>
+            <span style="font-size:11px;color:var(--gray-500);white-space:nowrap;margin-left:8px">2 / 8</span>
+          </div>
+        </div>
+
+        <!-- Orden con formulario en progreso -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-avatar" style="background:#f3f0ff;color:#6741d9">RL</div>
+            <div class="card-info">
+              <div class="card-order">OT-NORTE-2026-03-3110</div>
+              <div class="card-site">Sitio PAN-NR-3110 · Coclé</div>
+              <div class="card-meta">Inspector: R. López</div>
+            </div>
+            <span class="badge badge-readonly">En progreso</span>
+          </div>
+          <div class="card-footer">
+            <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:50%"></div></div>
+            <span style="font-size:11px;color:var(--gray-500);white-space:nowrap;margin-left:8px">4 / 8</span>
+          </div>
+        </div>
+
+        <!-- Orden casi completa -->
+        <div class="card" style="opacity:.75">
+          <div class="card-header">
+            <div class="card-avatar" style="background:#ebfbee;color:#2f9e44">JP</div>
+            <div class="card-info">
+              <div class="card-order">OT-ESTE-2026-03-0780</div>
+              <div class="card-site">Sitio HE-ES-0780 · Herrera</div>
+              <div class="card-meta">Inspector: J. Pérez</div>
+            </div>
+            <span class="badge badge-done">7 / 8</span>
+          </div>
+          <div class="card-footer">
+            <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:87%"></div></div>
+            <span style="font-size:11px;color:var(--gray-500);white-space:nowrap;margin-left:8px">7 / 8</span>
+          </div>
+        </div>
+      </div>
+      <div style="height:var(--bottom-h);background:#fff;border-top:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;gap:24px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+          <svg width="20" height="20" fill="none" stroke="var(--navy)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span style="font-size:9px;font-weight:700;color:var(--navy)">Inicio</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><span style="font-size:9px;color:var(--gray-500)">Buscar</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span style="font-size:9px;color:var(--gray-500)">Perfil</span></div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         SCREEN 3: FORMULARIOS — INSPECTOR A (dueño)
+    ════════════════════════════════ -->
+    <div class="screen" id="s3">
+      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="16" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+      <div class="app-header">
+        <div class="header-top">
+          <button class="header-back" onclick="showScreen('s1',null)">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div style="flex:1">
+            <div class="header-title">PA-CH-1036 · Chiriquí</div>
+          </div>
+          <span class="order-badge">OT-CENTRAL-03-1036</span>
+        </div>
+        <div class="header-subtitle">Inspector C. Martínez · tú</div>
+      </div>
+      <div class="scroll-area">
+        <div class="section-label">Progreso de formularios</div>
+
+        <!-- Form 1: Completado por mí -->
+        <div class="form-row">
+          <div class="form-icon">📋</div>
+          <div class="form-info">
+            <div class="form-name">Mantenimiento Preventivo</div>
+            <div class="form-assignee"><span class="dot mine"></span>Completado por ti</div>
+          </div>
+          <div class="form-status-col">
+            <span class="badge badge-done">✓ Listo</span>
+          </div>
+        </div>
+
+        <!-- Form 2: En progreso por mí (escritura) -->
+        <div class="form-row" onclick="showScreen('s6',null)">
+          <div class="form-icon">🔧</div>
+          <div class="form-info">
+            <div class="form-name">Mantenimiento Ejecutado</div>
+            <div class="form-assignee"><span class="dot mine"></span>Asignado a ti · En progreso</div>
+          </div>
+          <div class="form-status-col">
+            <span class="badge badge-mine">✏️ Escritura</span>
+          </div>
+        </div>
+
+        <!-- Form 3: Libre -->
+        <div class="form-row">
+          <div class="form-icon">📦</div>
+          <div class="form-info">
+            <div class="form-name">Inventario de Equipos v2</div>
+            <div class="form-assignee"><span class="dot free"></span>Sin asignar · disponible</div>
+          </div>
+          <div class="form-status-col">
+            <span class="badge badge-free">Libre</span>
+          </div>
+        </div>
+
+        <!-- Form 4: Tomado por Inspector B -->
+        <div class="annotation" data-note="NUEVO — asignación visible">
+        <div class="form-row readonly" style="border:none;border-radius:0;margin-bottom:0">
+          <div class="form-icon" style="background:#f3f0ff">🗼</div>
+          <div class="form-info">
+            <div class="form-name">Sistema de Ascenso</div>
+            <div class="form-assignee"><span class="dot other"></span>Tomado por B. Rodríguez</div>
+          </div>
+          <div class="form-status-col">
+            <span class="badge badge-other">👁 Solo lectura</span>
+          </div>
+        </div>
+        </div>
+
+        <!-- Form 5: Libre -->
+        <div class="form-row">
+          <div class="form-icon">⚡</div>
+          <div class="form-info">
+            <div class="form-name">Prueba de Puesta a Tierra</div>
+            <div class="form-assignee"><span class="dot free"></span>Sin asignar · disponible</div>
+          </div>
+          <div class="form-status-col">
+            <span class="badge badge-free">Libre</span>
+          </div>
+        </div>
+
+        <!-- Form 6-8 condensados -->
+        <div class="form-row" style="opacity:.6">
+          <div class="form-icon" style="background:#f8f9fa">📸</div>
+          <div class="form-info">
+            <div class="form-name">Reporte Adicional de Fotografías</div>
+            <div class="form-assignee"><span class="dot free"></span>Sin asignar</div>
+          </div>
+          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
+        </div>
+        <div class="form-row" style="opacity:.6">
+          <div class="form-icon" style="background:#f8f9fa">🔍</div>
+          <div class="form-info">
+            <div class="form-name">Inspección General</div>
+            <div class="form-assignee"><span class="dot free"></span>Sin asignar</div>
+          </div>
+          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
+        </div>
+        <div class="form-row" style="opacity:.6">
+          <div class="form-icon" style="background:#f8f9fa">🗂</div>
+          <div class="form-info">
+            <div class="form-name">Inventario de Equipos v1</div>
+            <div class="form-assignee"><span class="dot free"></span>Sin asignar</div>
+          </div>
+          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
+        </div>
+
+      </div>
+      <div style="height:var(--bottom-h);background:#fff;border-top:1px solid var(--gray-200);padding:8px 12px;display:flex;align-items:center">
+        <div style="flex:1;font-size:11px;color:var(--gray-500)">
+          <div style="font-weight:600;color:var(--gray-700);font-size:12px">3 / 8 formularios</div>
+          <div>1 tomado por equipo</div>
+        </div>
+        <button class="btn-next" style="width:auto;padding:0 20px" onclick="showScreen('s6',null)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         SCREEN 4: FORMULARIOS — INSPECTOR B (unido)
+    ════════════════════════════════ -->
+    <div class="screen" id="s4">
+      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="12" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+      <div class="app-header">
+        <div class="header-top">
+          <button class="header-back" onclick="showScreen('s2',null)">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div style="flex:1">
+            <div class="header-title">PA-CH-1044 · Chiriquí</div>
+          </div>
+          <span class="order-badge">OT-CENTRAL-03-1044</span>
+        </div>
+        <div class="header-subtitle">Propietario: D. Alvarado · modo colaboración</div>
+      </div>
+      <div class="scroll-area">
+        <!-- Banner colaboración -->
+        <div style="background:var(--navy);border-radius:10px;padding:10px 12px;margin-bottom:12px;display:flex;gap:8px;align-items:center">
+          <span style="font-size:14px">🤝</span>
+          <div style="flex:1">
+            <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:1px">Modo colaboración</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.6)">Puedes tomar formularios libres o ver los en progreso</div>
+          </div>
+        </div>
+
+        <div class="section-label">Formularios de la orden</div>
+
+        <!-- Form completado por A -->
+        <div class="form-row" style="opacity:.65;cursor:default">
+          <div class="form-icon">📋</div>
+          <div class="form-info">
+            <div class="form-name">Mantenimiento Preventivo</div>
+            <div class="form-assignee"><span class="dot other"></span>Completado por D. Alvarado</div>
+          </div>
+          <div class="form-status-col">
+            <span class="badge badge-done">✓ Listo</span>
+          </div>
+        </div>
+
+        <!-- Form en progreso por A — B puede ver en lectura -->
+        <div class="annotation" data-note="LECTURA + reasignar">
+        <div class="form-row readonly" onclick="showScreen('s5',null)" style="border:none;border-radius:0;margin-bottom:0">
+          <div class="form-icon" style="background:#fff9db">🔧</div>
+          <div class="form-info">
+            <div class="form-name">Mantenimiento Ejecutado</div>
+            <div class="form-assignee"><span class="dot other"></span>En progreso · D. Alvarado</div>
+          </div>
+          <div class="form-status-col">
+            <span class="badge badge-readonly">👁 Ver</span>
+          </div>
+        </div>
+        </div>
+
+        <!-- Form libre — B puede tomar -->
+        <div class="annotation" data-note="LIBRE — B puede tomar">
+        <div class="form-row" onclick="showScreen('s7',null)" style="border:none;border-radius:0;margin-bottom:0">
+          <div class="form-icon" style="background:var(--teal-light)">📦</div>
+          <div class="form-info">
+            <div class="form-name">Inventario de Equipos v2</div>
+            <div class="form-assignee"><span class="dot free"></span>Sin asignar · disponible</div>
+          </div>
+          <div class="form-status-col">
+            <span class="badge badge-free">➕ Tomar</span>
+          </div>
+        </div>
+        </div>
+
+        <!-- Resto de forms libres -->
+        <div class="form-row" onclick="showScreen('s7',null)">
+          <div class="form-icon">🗼</div>
+          <div class="form-info">
+            <div class="form-name">Sistema de Ascenso</div>
+            <div class="form-assignee"><span class="dot free"></span>Sin asignar · disponible</div>
+          </div>
+          <div class="form-status-col"><span class="badge badge-free">➕ Tomar</span></div>
+        </div>
+
+        <div class="form-row" style="opacity:.6;cursor:default">
+          <div class="form-icon" style="background:#f8f9fa">⚡</div>
+          <div class="form-info">
+            <div class="form-name">Prueba de Puesta a Tierra</div>
+            <div class="form-assignee"><span class="dot free"></span>Sin asignar</div>
+          </div>
+          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
+        </div>
+        <div class="form-row" style="opacity:.5;cursor:default">
+          <div class="form-icon" style="background:#f8f9fa">📸</div>
+          <div class="form-info"><div class="form-name">Reporte de Fotografías</div><div class="form-assignee"><span class="dot free"></span>Sin asignar</div></div>
+          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
+        </div>
+        <div class="form-row" style="opacity:.5;cursor:default">
+          <div class="form-icon" style="background:#f8f9fa">🔍</div>
+          <div class="form-info"><div class="form-name">Inspección General</div><div class="form-assignee"><span class="dot free"></span>Sin asignar</div></div>
+          <div class="form-status-col"><span class="badge badge-free">Libre</span></div>
+        </div>
+      </div>
+      <div style="height:var(--bottom-h);background:#fff;border-top:1px solid var(--gray-200);padding:8px 12px;display:flex;align-items:center;gap:8px">
+        <div style="flex:1;font-size:11px;color:var(--gray-500)">
+          <div style="font-weight:600;color:var(--gray-700);font-size:12px">1 / 8 completados</div>
+          <div>2 disponibles para tomar</div>
+        </div>
+        <button class="btn-next teal" style="width:auto;padding:0 16px" onclick="showScreen('s7',null)">+ Tomar formulario</button>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         SCREEN 5: FORMULARIO — MODO LECTURA (Inspector B ve form de A)
+    ════════════════════════════════ -->
+    <div class="screen" id="s5">
+      <div class="status-bar"><span class="status-time">9:43</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="8" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+      <div class="app-header">
+        <div class="header-top">
+          <button class="header-back" onclick="showScreen('s4',null)">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div style="flex:1">
+            <div class="header-title">Mantenimiento Ejecutado</div>
+          </div>
+          <span class="order-badge">OT-03-1044</span>
+        </div>
+      </div>
+
+      <!-- STEP PILLS -->
+      <div class="step-pills">
+        <div class="step-pill active">🔧 Paso 1</div>
+        <div class="step-pill">🔩 Paso 2</div>
+        <div class="step-pill">🏗 Paso 3</div>
+        <div class="step-pill">📸 Paso 4</div>
+      </div>
+
+      <!-- META BAR -->
+      <div class="meta-bar">
+        <div class="meta-item">
+          <div style="display:flex;flex-direction:column">
+            <span class="meta-label">INICIO</span>
+            <span class="meta-value">24/03 · 08:22</span>
+          </div>
+        </div>
+        <div class="meta-item">
+          <div style="display:flex;flex-direction:column">
+            <span class="meta-label">GPS</span>
+            <span class="meta-value">8.9824°, -79.5199°</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ASSIGNEE BAR (NUEVO) -->
+      <div class="annotation" data-note="NUEVO — barra asignación">
+      <div class="assignee-bar reader" style="border-top:none">
+        <div class="assignee-icon reader">DA</div>
+        <div class="assignee-text reader">
+          <div class="at-label">ASIGNADO A</div>
+          <div class="at-name">D. Alvarado · en progreso</div>
+        </div>
+        <button class="btn-take" onclick="showScreen('s7',null)">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          Reasignarme
+        </button>
+      </div>
+      </div>
+
+      <div class="scroll-area" style="padding-top:8px">
+        <!-- READONLY NOTICE -->
+        <div class="readonly-notice">
+          <div class="rn-icon">🔒</div>
+          <div class="rn-text">Este formulario está en <strong>modo solo lectura</strong>. Puedes ver el progreso de D. Alvarado. Para editar, presiona "Reasignarme".</div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title">Actividad Rawland</div>
+          <div class="field-row">
+            <div class="field-label">Actividad ejecutada</div>
+            <input class="field-input disabled" value="Limpieza de antenas sector norte" readonly>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Estado</div>
+            <select class="field-select disabled">
+              <option>Ejecutado</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Observaciones</div>
+            <input class="field-input disabled" value="Sin novedad relevante" readonly>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title">Evidencia fotográfica</div>
+          <div class="field-row">
+            <div class="field-label">Foto Antes</div>
+            <div class="photo-slot has-photo disabled">
+              <span style="font-size:11px;color:var(--gray-500)">📷 ant_act01_240324.jpg</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Foto Después</div>
+            <div class="photo-slot disabled">
+              <svg width="20" height="20" fill="none" stroke="var(--gray-400)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span class="photo-label">Sin foto</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title">Checklist de verificación</div>
+          <div class="check-item">
+            <div class="checkbox checked"><svg width="12" height="12" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="check-label">Equipos de seguridad utilizados</span>
+          </div>
+          <div class="check-item">
+            <div class="checkbox checked"><svg width="12" height="12" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="check-label">Área despejada antes de iniciar</span>
+          </div>
+          <div class="check-item">
+            <div class="checkbox disabled"></div>
+            <span class="check-label disabled">Reporte firmado por supervisor</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM NAV CON BOTÓN REASIGNARME (NUEVO) -->
+      <div class="bottom-nav">
+        <button class="btn-prev" onclick="showScreen('s4',null)">← Volver</button>
+        <button class="btn-next teal" onclick="showScreen('s7',null)">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          Reasignarme este formulario
+        </button>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         SCREEN 6: FORMULARIO — MODO ESCRITURA (Inspector A)
+    ════════════════════════════════ -->
+    <div class="screen" id="s6">
+      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="16" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+      <div class="app-header">
+        <div class="header-top">
+          <button class="header-back" onclick="showScreen('s3',null)">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div style="flex:1">
+            <div class="header-title">Mantenimiento Ejecutado</div>
+          </div>
+          <span class="order-badge">OT-03-1036</span>
+        </div>
+      </div>
+
+      <div class="step-pills">
+        <div class="step-pill done">✓ Paso 1</div>
+        <div class="step-pill active">🔩 Paso 2</div>
+        <div class="step-pill">🏗 Paso 3</div>
+        <div class="step-pill">📸 Paso 4</div>
+      </div>
+
+      <div class="meta-bar">
+        <div class="meta-item"><div style="display:flex;flex-direction:column"><span class="meta-label">INICIO</span><span class="meta-value">24/03 · 09:10</span></div></div>
+        <div class="meta-item"><div style="display:flex;flex-direction:column"><span class="meta-label">GPS</span><span class="meta-value">8.9824°, -79.5199°</span></div></div>
+      </div>
+
+      <!-- ASSIGNEE BAR MODO ESCRITURA (NUEVO) -->
+      <div class="annotation" data-note="NUEVO — barra asignación">
+      <div class="assignee-bar writer" style="border-top:none">
+        <div class="assignee-icon writer">CM</div>
+        <div class="assignee-text writer">
+          <div class="at-label">ASIGNADO A</div>
+          <div class="at-name">C. Martínez · tú · modo escritura</div>
+        </div>
+        <span class="badge" style="background:var(--teal);color:var(--navy);font-size:10px">✏️ Activo</span>
+      </div>
+      </div>
+
+      <div class="scroll-area" style="padding-top:8px">
+        <div class="field-group">
+          <div class="field-group-title">Actividad Rawland</div>
+          <div class="field-row">
+            <div class="field-label">Actividad ejecutada</div>
+            <input class="field-input" placeholder="Describe la actividad..." value="">
+          </div>
+          <div class="field-row">
+            <div class="field-label">Estado</div>
+            <select class="field-select">
+              <option value="">Seleccionar estado</option>
+              <option>Ejecutado</option>
+              <option>Pendiente</option>
+              <option>No aplica</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Observaciones</div>
+            <input class="field-input" placeholder="Observaciones adicionales...">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title">Evidencia fotográfica</div>
+          <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div>
+              <div class="field-label">Foto Antes</div>
+              <div class="photo-slot">
+                <svg width="20" height="20" fill="none" stroke="var(--gray-400)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span class="photo-label">📷 Antes</span>
+              </div>
+            </div>
+            <div>
+              <div class="field-label">Foto Después</div>
+              <div class="photo-slot">
+                <svg width="20" height="20" fill="none" stroke="var(--gray-400)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span class="photo-label">📷 Después</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title">Checklist</div>
+          <div class="check-item">
+            <div class="checkbox checked"><svg width="12" height="12" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="check-label">Equipos de seguridad utilizados</span>
+          </div>
+          <div class="check-item">
+            <div class="checkbox"></div>
+            <span class="check-label">Área despejada antes de iniciar</span>
+          </div>
+          <div class="check-item">
+            <div class="checkbox"></div>
+            <span class="check-label">Reporte firmado por supervisor</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <button class="btn-prev">← Anterior</button>
+        <button class="btn-next">Siguiente →</button>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         SCREEN 7: MODAL — TOMAR/REASIGNAR FORMULARIO
+    ════════════════════════════════ -->
+    <div class="screen" id="s7">
+      <!-- Fondo difuminado: form lista de inspector B -->
+      <div style="position:absolute;inset:0;background:var(--gray-50);overflow:hidden;filter:blur(2px)">
+        <div style="background:var(--navy);height:100px"></div>
+        <div style="padding:12px">
+          <div style="background:#fff;height:56px;border-radius:12px;margin-bottom:8px;border:1px solid var(--gray-200)"></div>
+          <div style="background:#fff;height:56px;border-radius:12px;margin-bottom:8px;border:1px solid var(--gray-200)"></div>
+          <div style="background:#fff;height:56px;border-radius:12px;border:1px solid var(--gray-200)"></div>
+        </div>
+      </div>
+      <!-- MODAL SHEET -->
+      <div class="modal-backdrop">
+        <div class="modal-sheet">
+          <div class="modal-handle"></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+            <div style="width:44px;height:44px;border-radius:12px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📋</div>
+            <div>
+              <div class="modal-title" style="margin-bottom:0">Tomar formulario</div>
+              <div style="font-size:12px;color:var(--gray-500)">Inventario de Equipos v2</div>
+            </div>
+          </div>
+          <div class="modal-desc">
+            Al tomar este formulario, se te asignará en modo escritura y podrás documentarlo. <strong>Esta acción es registrada y auditable.</strong>
+          </div>
+          <div class="modal-info">
+            <div class="modal-info-row">
+              <span class="modal-info-label">Orden</span>
+              <span class="modal-info-val" style="font-family:'JetBrains Mono',monospace;font-size:11px">OT-CENTRAL-2026-03-1044</span>
+            </div>
+            <div class="modal-info-row">
+              <span class="modal-info-label">Formulario</span>
+              <span class="modal-info-val">Inventario de Equipos v2</span>
+            </div>
+            <div class="modal-info-row">
+              <span class="modal-info-label">Estado actual</span>
+              <span class="badge badge-free" style="font-size:10px">Sin asignar</span>
+            </div>
+            <div class="modal-info-row">
+              <span class="modal-info-label">Asignado a</span>
+              <span class="modal-info-val" style="color:var(--teal-dark)">B. Rodríguez · tú</span>
+            </div>
+          </div>
+          <button class="modal-btn-primary teal" onclick="showScreen('s6_alt',null)">
+            ✅ Confirmar — Tomar formulario
+          </button>
+          <button class="modal-btn-secondary" onclick="showScreen('s4',null)">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         SCREEN 8: TOAST — FORMULARIO REASIGNADO (offline)
+    ════════════════════════════════ -->
+    <div class="screen" id="s8">
+      <div class="status-bar"><span class="status-time">9:48</span><div class="status-icons"><svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2.5" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="2.5" width="16" height="7" rx="1.5" fill="white"/><path d="M22.5 4v4a2 2 0 000-4z"/></svg></div></div>
+      <div class="app-header">
+        <div class="header-top">
+          <button class="header-back" onclick="showScreen('s3',null)">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div style="flex:1"><div class="header-title">Mantenimiento Ejecutado</div></div>
+          <span class="order-badge">OT-03-1036</span>
+        </div>
+      </div>
+
+      <div class="step-pills">
+        <div class="step-pill done">✓ Paso 1</div>
+        <div class="step-pill active">🔩 Paso 2</div>
+        <div class="step-pill">🏗 Paso 3</div>
+        <div class="step-pill">📸 Paso 4</div>
+      </div>
+
+      <!-- TOAST (aparece encima) -->
+      <div class="toast">
+        <div class="toast-icon">⚠️</div>
+        <div class="toast-body">
+          <div class="toast-title">Formulario reasignado</div>
+          <div class="toast-desc">Mientras estabas offline, <strong>B. Rodríguez</strong> tomó este formulario. Tus cambios locales no se guardaron. Ahora estás en modo lectura.</div>
+        </div>
+        <span class="toast-close" onclick="this.parentElement.style.display='none'">✕</span>
+      </div>
+
+      <div class="meta-bar">
+        <div class="meta-item"><div style="display:flex;flex-direction:column"><span class="meta-label">INICIO</span><span class="meta-value">24/03 · 09:10</span></div></div>
+        <div class="meta-item"><div style="display:flex;flex-direction:column"><span class="meta-label">GPS</span><span class="meta-value">8.9824°, -79.5199°</span></div></div>
+      </div>
+
+      <!-- ASSIGNEE BAR — ahora dice B. Rodríguez -->
+      <div class="assignee-bar reader">
+        <div class="assignee-icon reader">BR</div>
+        <div class="assignee-text reader">
+          <div class="at-label">ASIGNADO A</div>
+          <div class="at-name">B. Rodríguez · tomado mientras offline</div>
+        </div>
+        <button class="btn-take" onclick="showScreen('s7',null)">
+          Reasignarme
+        </button>
+      </div>
+
+      <div class="scroll-area" style="padding-top:8px">
+        <div class="readonly-notice">
+          <div class="rn-icon">📵</div>
+          <div class="rn-text"><strong>Estabas offline</strong> cuando B. Rodríguez tomó este formulario. Los cambios que hiciste localmente no se guardaron. Para continuar editando, presiona "Reasignarme".</div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title">Actividad Rawland</div>
+          <div class="field-row">
+            <div class="field-label">Actividad ejecutada</div>
+            <input class="field-input disabled" value="" placeholder="Sin datos guardados" readonly>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Estado</div>
+            <select class="field-select disabled"><option>Sin seleccionar</option></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <button class="btn-prev" onclick="showScreen('s3',null)">← Volver</button>
+        <button class="btn-next teal" onclick="showScreen('s7',null)">
+          Reasignarme →
+        </button>
+      </div>
+    </div>
+
+  </div><!-- phone-screen -->
+</div><!-- phone-wrap -->
+
+<div class="screen-desc" id="screen-desc">
+  <strong>Pantalla 1 — Home modificado:</strong> Tab "Mis Órdenes" existente + nuevo tab "Mi Equipo" con badge de órdenes activas del equipo. Cambio mínimo en la UI actual.
+</div>
+
+<script>
+const descs = {
+  s1: '<strong>Pantalla 1 — Home / Mis Órdenes (modificado):</strong> Se agrega el tab "Mi Equipo" con badge numérico y etiqueta "nuevo". El flujo existente de Mis Órdenes no cambia.',
+  s2: '<strong>Pantalla 2 — Home / Mi Equipo (NUEVO):</strong> Lista órdenes activas de la empresa con el inspector dueño, badge de formularios libres disponibles y banner informativo de modo colaboración.',
+  s3: '<strong>Pantalla 3 — Lista de formularios (Inspector A / dueño):</strong> Ahora cada form muestra quién lo tiene asignado. El form tomado por Inspector B aparece en modo solo-lectura para A.',
+  s4: '<strong>Pantalla 4 — Lista de formularios (Inspector B / colaborador):</strong> B ve todos los forms. Los libres muestran "➕ Tomar". Los en progreso muestran "👁 Ver" para entrar en lectura.',
+  s5: '<strong>Pantalla 5 — Formulario en modo lectura (Inspector B):</strong> Barra de asignación en amarillo con botón "Reasignarme", aviso de solo-lectura, todos los inputs deshabilitados. Botón en BottomNav también.',
+  s6: '<strong>Pantalla 6 — Formulario en modo escritura (Inspector A):</strong> Barra de asignación en verde/teal confirmando que el inspector actual tiene el control. Inputs editables normalmente.',
+  s7: '<strong>Pantalla 7 — Modal "Tomar formulario" (NUEVO):</strong> Bottom sheet con detalles del formulario, estado actual y confirmación atómica. Funciona igual para form libre o reasignación de form ocupado.',
+  s8: '<strong>Pantalla 8 — Toast de reasignación offline (NUEVO):</strong> Inspector A vuelve de offline y ve que perdió la asignación. Toast no bloqueante, barra en amarillo con el nuevo dueño y opción de "Reasignarme".'
+};
+
+function showScreen(id, btn) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.leg-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else {
+    const map = {s1:0,s2:1,s3:2,s4:3,s5:4,s6:5,s7:6,s8:7};
+    const idx = map[id];
+    if(idx !== undefined) {
+      const btns = document.querySelectorAll('.leg-btn');
+      if(btns[idx]) btns[idx].classList.add('active');
+    }
+  }
+  const desc = document.getElementById('screen-desc');
+  if(desc && descs[id]) desc.innerHTML = descs[id];
+}
+</script>
+</body>
+</html>
